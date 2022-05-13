@@ -17,11 +17,15 @@ class LoginProvider extends SubfaveMainProvider {
     notifyListeners();
   }
 
-  Future<void> changePassword() async{
+  Future<void> changePassword() async {
     // Todo change password method, handle ui and backend;
-  } 
+  }
 
   Future<bool> login(String email, String password) async {
+    if (!(super.checkEmailValidation(email) &&
+        super.checkPasswordValidation(password))) {
+      return false;
+    }
     var body = {"email": "email", "password": "admin"};
     var res = await super.postRequest(body, 'http://localhost:8080/login');
     return false;

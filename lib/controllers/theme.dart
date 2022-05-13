@@ -2,24 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:subfave/screens/config.dart';
 
 class ThemeProvider with ChangeNotifier {
-    static bool _isDark = false;
+    bool isDark = false;
     
     ThemeProvider() {
       if (box.containsKey('currentTheme')){
-        _isDark = box.get('currentTheme');
+        isDark = box.get('currentTheme');
       }else{
-        box.put('currentTheme', _isDark);
+        box.put('currentTheme', isDark);
       }
     }
 
     ThemeMode currentTheme() {
 
-      return _isDark ? ThemeMode.dark : ThemeMode.light;
+      return isDark ? ThemeMode.dark : ThemeMode.light;
     }
 
     void changeTheme() {
-      _isDark = !_isDark;
-      box.put('currentTheme', _isDark);
+      isDark = !isDark;
+      box.put('currentTheme', isDark);
       notifyListeners();
     }
 
