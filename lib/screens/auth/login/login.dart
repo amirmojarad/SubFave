@@ -24,6 +24,9 @@ class LoginPage extends StatelessWidget {
                 ? const CircularProgressIndicator()
                 : Column(
                     children: [
+                      const SizedBox(
+                        height: 64,
+                      ),
                       Column(
                         children: [
                           SubfaveTextField(
@@ -82,7 +85,10 @@ class LoginPage extends StatelessWidget {
                                 ),
                               )
                             ],
-                          )
+                          ),
+                          const SizedBox(
+                            height: 64,
+                          ),
                         ],
                       ),
                     ],

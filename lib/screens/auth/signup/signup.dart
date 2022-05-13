@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:subfave/controllers/signup.dart';
+import 'package:subfave/screens/common/app_bar.dart';
 import 'package:subfave/screens/common/button.dart';
 import 'package:subfave/screens/common/textfield.dart';
 import 'package:subfave/screens/config.dart';
 import 'package:subfave/screens/subfave.dart';
-
-import '../../../temp.dart';
 
 class SignupPage extends StatelessWidget {
   SignupPage({Key? key}) : super(key: key);
@@ -17,11 +16,16 @@ class SignupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
             child: Column(
               children: [
+                const SubfaveAppBar(),
+                const SizedBox(
+                  height: 64,
+                ),
                 SubfaveTextField(
                   hintText: "example@example.com",
                   title: "Email",
@@ -45,6 +49,7 @@ class SignupPage extends StatelessWidget {
                   hintText: "",
                   title: "Confirm Password",
                 ),
+                const SizedBox(height: 32),
                 SubfaveButton(
                   title: "SignUp",
                   onTap: () async => context.read<SignupProvider>().signup(
@@ -86,7 +91,10 @@ class SignupPage extends StatelessWidget {
                       ),
                     )
                   ],
-                )
+                ),
+                const SizedBox(
+                  height: 64,
+                ),
               ],
             ),
           ),
