@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:subfave/controllers/login.dart';
 import 'package:subfave/screens/auth/login/remember_me.dart';
+import 'package:subfave/screens/common/app_bar.dart';
 import 'package:subfave/screens/common/button.dart';
 import 'package:subfave/screens/common/textfield.dart';
 import 'package:http/http.dart' as http;
@@ -24,6 +25,7 @@ class LoginPage extends StatelessWidget {
                 ? const CircularProgressIndicator()
                 : Column(
                     children: [
+                      const SubfaveAppBar(),
                       const SizedBox(
                         height: 64,
                       ),

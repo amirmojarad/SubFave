@@ -1,16 +1,19 @@
-class User {
+import 'package:subfave/models/subfave.dart';
+
+class User extends SubfaveSuperModel {
   final String username, token, email;
-  const User({
+  User({
     required this.email,
     required this.token,
     required this.username,
   });
-  
-  void load() async{
-    // TODO load user data from sharedprefrences
+
+  factory User.fromJson(Map json) {
+    return User(
+        email: json["email"], token: json["token"], username: json["username"]);
   }
 
-  void save() async {
-    // TODO save user to sharedPrefrences
+  Map toJson() {
+    return {"email": email, "token": token, "username": username};
   }
 }

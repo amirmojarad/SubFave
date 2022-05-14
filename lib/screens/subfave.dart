@@ -43,6 +43,11 @@ class _SubfaveState extends State<Subfave> {
             fontWeight: FontWeight.w700,
             fontSize: 16,
           ),
+          headlineLarge: TextStyle(
+            color: Color(0xff1B4332),
+            fontWeight: FontWeight.w900,
+            fontSize: 26,
+          ), 
         ),
       ),
       darkTheme: ThemeData.dark(),
