@@ -10,10 +10,10 @@ class User extends SubfaveSuperModel {
 
   factory User.fromJson(Map json) {
     return User(
-        email: json["email"], token: json["token"], username: json["username"]);
+        email: json["user"]["email"], token: json["token"], username: json["user"]["username"]);
   }
 
-  Map toJson() {
+  Map<String, dynamic> toJson() {
     return {"email": email, "token": token, "username": username};
   }
 }

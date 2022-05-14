@@ -1,26 +1,14 @@
 import 'package:flutter/material.dart';
 
-class SubfaveTextField extends StatelessWidget {
-  SubfaveTextField({
+class SubfavePasswordFormField extends StatelessWidget {
+  SubfavePasswordFormField({
     Key? key,
-    required this.hintText,
     required this.title,
     required this.controller,
     required this.error,
-    required this.errorText,
-    required this.isPassword,
-    required this.validator,
-    required this.passwordIsValid,
-    required this.passwordValidationText,
   }) : super(key: key);
-  final String errorText;
-  final String hintText;
   final String title;
-  final String passwordValidationText;
-  final bool passwordIsValid;
   final bool error;
-  final bool isPassword;
-  Function(String value) validator;
   final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
@@ -32,23 +20,21 @@ class SubfaveTextField extends StatelessWidget {
         const SizedBox(height: 8),
         SizedBox(
           child: TextFormField(
-            validator: (value) => validator(value!),
             controller: controller,
-            obscureText: isPassword,
+            obscureText: true,
             decoration: InputDecoration(
               focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(4),
                 borderSide:
                     BorderSide(color: Theme.of(context).colorScheme.error),
               ),
-              errorText: error ? errorText : null,
+              errorText: error ? "Passwords Are not Match" : null,
               errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(4),
                 borderSide: BorderSide(
                   color: Theme.of(context).colorScheme.error,
                 ),
               ),
-              hintText: hintText,
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(

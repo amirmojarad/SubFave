@@ -1,25 +1,15 @@
 import 'package:flutter/material.dart';
 
-class SubfaveTextField extends StatelessWidget {
-  SubfaveTextField({
+class SubfaveEmailFormField extends StatelessWidget {
+  SubfaveEmailFormField({
     Key? key,
-    required this.hintText,
-    required this.title,
     required this.controller,
     required this.error,
     required this.errorText,
-    required this.isPassword,
     required this.validator,
-    required this.passwordIsValid,
-    required this.passwordValidationText,
   }) : super(key: key);
   final String errorText;
-  final String hintText;
-  final String title;
-  final String passwordValidationText;
-  final bool passwordIsValid;
   final bool error;
-  final bool isPassword;
   Function(String value) validator;
   final TextEditingController controller;
   @override
@@ -28,13 +18,12 @@ class SubfaveTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(title),
+        const Text("Email"),
         const SizedBox(height: 8),
         SizedBox(
           child: TextFormField(
             validator: (value) => validator(value!),
             controller: controller,
-            obscureText: isPassword,
             decoration: InputDecoration(
               focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(4),
@@ -48,7 +37,7 @@ class SubfaveTextField extends StatelessWidget {
                   color: Theme.of(context).colorScheme.error,
                 ),
               ),
-              hintText: hintText,
+              hintText: "example@example.com",
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(

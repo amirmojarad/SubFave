@@ -27,6 +27,7 @@ class _SubfaveState extends State<Subfave> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        errorColor: const Color(0xffD12525),
         backgroundColor: const Color(0xff1B4332),
         colorScheme: const ColorScheme.light(
           background: Color(0xffD8F3DC),
@@ -47,7 +48,7 @@ class _SubfaveState extends State<Subfave> {
             color: Color(0xff1B4332),
             fontWeight: FontWeight.w900,
             fontSize: 26,
-          ), 
+          ),
         ),
       ),
       darkTheme: ThemeData.dark(),

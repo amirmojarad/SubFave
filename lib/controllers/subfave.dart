@@ -5,6 +5,12 @@ import 'package:http/http.dart' as http;
 
 class SubfaveMainProvider with ChangeNotifier {
   bool isLoading = false;
+  bool internalServerError = false;
+  bool pageNotFoundError = false;
+  bool badRequestError = false;
+  bool passwordsAreNotEqual = false;
+
+  bool passwordValidation = true;
 
   bool checkEmailValidation(String email) {
     return RegExp(

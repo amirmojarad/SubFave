@@ -3,9 +3,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:subfave/controllers/login.dart';
+import 'package:subfave/controllers/signup.dart';
 import 'package:subfave/screens/auth/login/remember_me.dart';
+import 'package:subfave/screens/auth/signup/signup.dart';
 import 'package:subfave/screens/common/app_bar.dart';
 import 'package:subfave/screens/common/button.dart';
+import 'package:subfave/screens/common/email_form.dart';
+import 'package:subfave/screens/common/password_form.dart';
 import 'package:subfave/screens/common/textfield.dart';
 import 'package:http/http.dart' as http;
 
@@ -31,17 +35,43 @@ class LoginPage extends StatelessWidget {
                       ),
                       Column(
                         children: [
-                          SubfaveTextField(
-                            hintText: "example@example.com",
-                            title: "Email",
+                          SubfaveEmailFormField(
                             controller: emailController,
+                            error: false,
+                            errorText: "",
+                            validator: (value) => {},
                           ),
-                          const SizedBox(height: 16),
-                          SubfaveTextField(
-                            hintText: "",
+                          SubfavePasswordFormField(
                             title: "Password",
                             controller: passwordController,
-                          ),
+                            error: false,
+                          )
+                          // SubfaveTextField(
+                          //   passwordIsValid: false,
+                          //   passwordValidationText: "",
+                          //   validator: (value) => {},
+                          //   isPassword: false,
+                          //   error: false,
+                          //   errorText: "",
+                          //   hintText: "example@example.com",
+                          //   title: "Email",
+                          //   controller: emailController,
+                          // ),
+                          // const SizedBox(height: 16),
+                          // SubfaveTextField(
+                          //   passwordIsValid: context
+                          //       .watch<LoginProvider>()
+                          //       .passwordValidation,
+                          //   passwordValidationText: "Weak Password",
+                          //   validator: (value) => {},
+                          //   isPassword: true,
+                          //   error: false,
+                          //   errorText: "",
+                          //   hintText: "",
+                          //   title: "Password",
+                          //   controller: passwordController,
+                          // ),
+                          ,
                           const SizedBox(height: 16),
                           const RememberMe(),
                           const SizedBox(height: 128),

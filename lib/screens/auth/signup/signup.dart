@@ -4,8 +4,6 @@ import 'package:subfave/controllers/signup.dart';
 import 'package:subfave/screens/common/app_bar.dart';
 import 'package:subfave/screens/common/button.dart';
 import 'package:subfave/screens/common/textfield.dart';
-import 'package:subfave/screens/config.dart';
-import 'package:subfave/screens/subfave.dart';
 
 class SignupPage extends StatelessWidget {
   SignupPage({Key? key}) : super(key: key);
@@ -27,38 +25,72 @@ class SignupPage extends StatelessWidget {
                   height: 64,
                 ),
                 SubfaveTextField(
+                  passwordIsValid: false,
+                  passwordValidationText: "",
+                  validator: (value) => {},
+                  isPassword: false,
+                  error: false,
+                  errorText: "",
                   hintText: "example@example.com",
                   title: "Email",
                   controller: email,
                 ),
                 const SizedBox(height: 16),
                 SubfaveTextField(
+                  passwordIsValid: false,
+                  passwordValidationText: "",
+                  validator: (value) => {},
+                  isPassword: false,
+                  error: false,
+                  errorText: "",
                   controller: username,
                   hintText: "",
                   title: "Username",
                 ),
                 const SizedBox(height: 16),
                 SubfaveTextField(
+                  passwordIsValid:
+                      context.watch<SignupProvider>().passwordValidation,
+                  passwordValidationText: "Weak Password",
+                  validator: (value) =>
+                      context.read<SignupProvider>().checkConfirmPassword(
+                            password.text,
+                            confirmPassword.text,
+                          ),
+                  isPassword: true,
+                  error: context.watch<SignupProvider>().passwordsAreNotEqual,
+                  errorText: "Passwords Are Not Equal",
                   controller: password,
                   hintText: "",
                   title: "Password",
                 ),
                 const SizedBox(height: 16),
                 SubfaveTextField(
+                  passwordIsValid: false,
+                  passwordValidationText: "",
+                  validator: (value) =>
+                      context.read<SignupProvider>().checkConfirmPassword(
+                            password.text,
+                            confirmPassword.text,
+                          ),
+                  isPassword: true,
+                  error: context.watch<SignupProvider>().passwordsAreNotEqual,
+                  errorText: "Passwords Are Not Equal",
                   controller: confirmPassword,
                   hintText: "",
                   title: "Confirm Password",
                 ),
                 const SizedBox(height: 32),
                 SubfaveButton(
-                  title: "SignUp",
-                  onTap: () async => context.read<SignupProvider>().signup(
-                        username.text,
-                        password.text,
-                        confirmPassword.text,
-                        email.text,
-                      ),
-                ),
+                    title: "SignUp",
+                    onTap: () async {
+                      await context.read<SignupProvider>().signup(
+                            username.text,
+                            password.text,
+                            confirmPassword.text,
+                            email.text,
+                          );
+                    }),
                 const SizedBox(height: 16),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,

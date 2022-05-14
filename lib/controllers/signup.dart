@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:subfave/controllers/subfave.dart';
+import 'package:subfave/models/user.dart';
 
 class SignupProvider extends SubfaveMainProvider {
   bool checkConfirmPassword(String password, String confirmPassword) {
@@ -11,20 +14,33 @@ class SignupProvider extends SubfaveMainProvider {
     String confirmPassword,
     String email,
   ) async {
-    if (!checkConfirmPassword(password, confirmPassword)) {
+    if (!checkPasswordValidation(password)){
+      passwordValidation = false;
+      notifyListeners();
       return;
     }
+    if (!checkConfirmPassword(password, confirmPassword)) {
+      passwordsAreNotEqual = true;
+      notifyListeners();
+      return;
+    }
+    var url = "http://localhost:8080/signup";
     var body = {"username": username, "email": email, "password": password};
-    var res = await super.postRequest(body, "http://localhost:8080/signup");
-    // if Response code is 200 ...
-    // if error occured ...
-  }
-
-  String string = "";
-  int number = 0;
-  void fun1() {
-    string = "changed";
-    number++;
-    notifyListeners();
+    var res = await super.postRequest(body, url);
+    var statusCode = res.statusCode;
+    print(statusCode);
+    if (statusCode == 201 || statusCode == 200) {
+      User newUser = User.fromJson(jsonDecode(res.body));
+      await newUser.save('user', newUser.toJson());
+    } else if (statusCode == 400) {
+      badRequestError = true;
+      notifyListeners();
+    } else if (statusCode == 404) {
+      pageNotFoundError = true;
+      notifyListeners();
+    } else if (statusCode == 500) {
+      internalServerError = true;
+      notifyListeners();
+    }
   }
 }
