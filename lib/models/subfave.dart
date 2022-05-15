@@ -9,7 +9,7 @@ class SubfaveSuperModel {
 
   Future<bool> save(String key, Map<String, dynamic> jsonMap) async {
     SharedPreferences prefs = await _callPrefs();
-    return await prefs.setString('user', jsonEncode(jsonMap));
+    return await prefs.setString(key, jsonEncode(jsonMap));
   }
 
   Future<Map<String, dynamic>> load(String key) async {

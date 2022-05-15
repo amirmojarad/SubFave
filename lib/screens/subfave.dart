@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:subfave/controllers/home.dart';
 import 'package:subfave/controllers/login.dart';
 import 'package:subfave/controllers/signup.dart';
 import 'package:subfave/screens/auth/login/login.dart';
 import 'package:subfave/screens/auth/signup/signup.dart';
+import 'package:subfave/screens/common/scroll.dart';
 import 'package:subfave/screens/config.dart';
+import 'package:subfave/screens/home/home.dart';
 
 class Subfave extends StatefulWidget {
   const Subfave({Key? key}) : super(key: key);
@@ -25,11 +28,16 @@ class _SubfaveState extends State<Subfave> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scrollBehavior: MyCustomScrollBehavior(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         errorColor: const Color(0xffD12525),
         backgroundColor: const Color(0xff1B4332),
+        snackBarTheme: const SnackBarThemeData(
+          backgroundColor: Color(0xff70DD45),
+        ),
         colorScheme: const ColorScheme.light(
+          
           background: Color(0xffD8F3DC),
           primary: Color(0xff1B4332),
         ),
@@ -63,6 +71,10 @@ class _SubfaveState extends State<Subfave> {
               create: (context) => LoginProvider(),
               child: LoginPage(),
             ),
+        '/home': (context) => ChangeNotifierProvider(
+              create: (context) => HomeProvider(),
+              child:  HomePage(),
+            )
       },
     );
   }

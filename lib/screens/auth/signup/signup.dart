@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:subfave/controllers/signup.dart';
-import 'package:subfave/screens/common/app_bar.dart';
+import 'package:subfave/screens/common/appbar.dart';
 import 'package:subfave/screens/common/button.dart';
 import 'package:subfave/screens/common/textfield.dart';
 
 class SignupPage extends StatelessWidget {
   SignupPage({Key? key}) : super(key: key);
+  final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
+
   final TextEditingController email = TextEditingController(),
       username = TextEditingController(),
       password = TextEditingController(),
@@ -14,13 +16,13 @@ class SignupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: getAppBar(_key),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const SubfaveAppBar(),
                 const SizedBox(
                   height: 64,
                 ),

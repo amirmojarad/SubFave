@@ -17,8 +17,8 @@ class ThemeProvider with ChangeNotifier {
       return isDark ? ThemeMode.dark : ThemeMode.light;
     }
 
-    void changeTheme() {
-      isDark = !isDark;
+    void changeTheme(bool dark) {
+      isDark = dark;
       box.put('currentTheme', isDark);
       notifyListeners();
     }
