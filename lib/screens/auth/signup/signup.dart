@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:subfave/controllers/signup.dart';
 import 'package:subfave/screens/common/appbar.dart';
 import 'package:subfave/screens/common/button.dart';
+import 'package:subfave/screens/common/drawer.dart';
 import 'package:subfave/screens/common/textfield.dart';
 
 class SignupPage extends StatelessWidget {
@@ -16,6 +17,8 @@ class SignupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _key,
+      drawer: const SubfaveDrawer(),
       appBar: getAppBar(_key),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(

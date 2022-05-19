@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:subfave/controllers/subfave.dart';
 import 'package:subfave/models/user.dart';
+import 'package:subfave/screens/config.dart';
 
 class LoginProvider extends SubfaveMainProvider {
   bool rememberMe = false;
@@ -33,8 +34,8 @@ class LoginProvider extends SubfaveMainProvider {
     print(responseBody);
     print(responseBody["token"]);
     if (statusCode == 200) {
-      User user = User.fromJson(responseBody);
-      user.save('user', user.toJson());
+      user = User.fromJson(responseBody);
+      await user.save('user', user.toJson());
       return true;
     } else if (statusCode == 400) {
       var decodedBody = jsonDecode(res.body);

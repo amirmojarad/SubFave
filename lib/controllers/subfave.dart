@@ -30,7 +30,6 @@ class SubfaveMainProvider with ChangeNotifier {
     String url,
   ) async {
     loading();
-    notifyListeners();
     var body = jsonEncode(jsonRawData);
 
     var res = await http.post(Uri.parse(url), body: body, headers: {

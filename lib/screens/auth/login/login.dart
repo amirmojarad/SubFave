@@ -4,6 +4,7 @@ import 'package:subfave/controllers/login.dart';
 import 'package:subfave/screens/auth/login/remember_me.dart';
 import 'package:subfave/screens/common/appbar.dart';
 import 'package:subfave/screens/common/button.dart';
+import 'package:subfave/screens/common/drawer.dart';
 import 'package:subfave/screens/common/email_form.dart';
 import 'package:subfave/screens/common/password_form.dart';
 
@@ -17,6 +18,8 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var loading = context.watch<LoginProvider>().isLoading;
     return Scaffold(
+      key: _key,
+      drawer: const SubfaveDrawer(),
       appBar: getAppBar(_key),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:subfave/screens/common/subfave_card.dart';
 import 'package:subfave/screens/common/theme_button.dart';
 import 'package:subfave/screens/config.dart';
-import 'package:subfave/screens/home/home.dart';
 
 class SubfaveDrawer extends StatelessWidget {
   const SubfaveDrawer({

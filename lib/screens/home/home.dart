@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       key: _key,
       drawer: SubfaveDrawer(),
-      appBar:getAppBar(_key) ,
+      appBar: getAppBar(_key),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -30,14 +30,23 @@ class HomePage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
-                      SubfaveCardItem(title: "Search Movies"),
-                      SizedBox(width: 16),
-                      SubfaveCardItem(title: "Favorites"),
-                      SizedBox(width: 16),
-                      SubfaveCardItem(title: "Vocabs"),
-                      SizedBox(width: 16),
-                      SubfaveCardItem(title: "Upload Subtitle"),
+                    children: [
+                      GestureDetector(
+                        onTap: () => Navigator.pushNamed(context, '/search'),
+                        child: SubfaveCardItem(
+                          title: "Search Movies",
+                          
+                        ),
+                      ),
+                      // const SizedBox(width: 16),
+                      // SubfaveCardItem(
+                      //   title: "Favorites",
+                      //   onTap: () {},
+                      // ),
+                      // SizedBox(width: 16),
+                      // SubfaveCardItem(title: "Vocabs", onTap: () {}),
+                      // SizedBox(width: 16),
+                      // SubfaveCardItem(title: "Upload Subtitle", onTap: () {}),
                     ],
                   )
                 ],
@@ -49,6 +58,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
-
-

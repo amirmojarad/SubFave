@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:subfave/controllers/home.dart';
 import 'package:subfave/controllers/login.dart';
+import 'package:subfave/controllers/search_movie.dart';
 import 'package:subfave/controllers/signup.dart';
 import 'package:subfave/screens/auth/login/login.dart';
 import 'package:subfave/screens/auth/signup/signup.dart';
 import 'package:subfave/screens/common/scroll.dart';
 import 'package:subfave/screens/config.dart';
 import 'package:subfave/screens/home/home.dart';
+import 'package:subfave/screens/search/search.dart';
 
 class Subfave extends StatefulWidget {
   const Subfave({Key? key}) : super(key: key);
@@ -37,7 +39,6 @@ class _SubfaveState extends State<Subfave> {
           backgroundColor: Color(0xff70DD45),
         ),
         colorScheme: const ColorScheme.light(
-          
           background: Color(0xffD8F3DC),
           primary: Color(0xff1B4332),
         ),
@@ -73,7 +74,11 @@ class _SubfaveState extends State<Subfave> {
             ),
         '/home': (context) => ChangeNotifierProvider(
               create: (context) => HomeProvider(),
-              child:  HomePage(),
+              child: HomePage(),
+            ),
+        '/search': (context) => ChangeNotifierProvider(
+              create: (context) => SearchProvider(),
+              child: SearchPage(),
             )
       },
     );
