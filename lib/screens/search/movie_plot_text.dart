@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class MoviePlotText extends StatelessWidget {
@@ -11,6 +10,13 @@ class MoviePlotText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(plot);
+    return Flexible(
+      child: Text(
+        plot,
+        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              color: Theme.of(context).colorScheme.background,
+            ),
+      ),
+    );
   }
 }

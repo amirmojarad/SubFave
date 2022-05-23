@@ -8,21 +8,21 @@ class SignupProvider extends SubfaveMainProvider {
     return password == confirmPassword;
   }
 
-  Future<void> signup(
+  Future<bool> signup(
     String username,
     String password,
     String confirmPassword,
     String email,
   ) async {
-    if (!checkPasswordValidation(password)){
-      passwordValidation = false;
-      notifyListeners();
-      return;
-    }
+    // if (!checkPasswordValidation(password)){
+    //   passwordValidation = false;
+    //   notifyListeners();
+    //   return;
+    // }
     if (!checkConfirmPassword(password, confirmPassword)) {
       passwordsAreNotEqual = true;
       notifyListeners();
-      return;
+      return false;
     }
     var url = "http://localhost:8080/signup";
     var body = {"username": username, "email": email, "password": password};
@@ -32,6 +32,7 @@ class SignupProvider extends SubfaveMainProvider {
     if (statusCode == 201 || statusCode == 200) {
       User newUser = User.fromJson(jsonDecode(res.body));
       await newUser.save('user', newUser.toJson());
+      return true;
     } else if (statusCode == 400) {
       badRequestError = true;
       notifyListeners();
@@ -42,5 +43,6 @@ class SignupProvider extends SubfaveMainProvider {
       internalServerError = true;
       notifyListeners();
     }
+    return false;
   }
 }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class SearchResultCardTopSection extends StatelessWidget {
@@ -16,21 +15,24 @@ class SearchResultCardTopSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title),
-        Row(
-          children: [
-            Row(
-              children: [
-                const Icon(Icons.star_border, color: Colors.yellow),
-                Text(imdbRating)
-              ],
-            ),
-            Text(genres),
-          ],
-        )
+        Text(
+          title,
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                color: Theme.of(context).colorScheme.background,
+              ),
+        ),
+        // Row(
+        //   children: [
+        //     Row(
+        //       children: [
+        //         const Icon(Icons.star_border, color: Colors.yellow),
+        //         Text(imdbRating)
+        //       ],
+        //     ),
+        //     Text(genres),
+        //   ],
+        // )
       ],
     );
   }

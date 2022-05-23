@@ -87,15 +87,19 @@ class SignupPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 32),
                 SubfaveButton(
-                    title: "SignUp",
-                    onTap: () async {
-                      await context.read<SignupProvider>().signup(
-                            username.text,
-                            password.text,
-                            confirmPassword.text,
-                            email.text,
-                          );
-                    }),
+                  title: "SignUp",
+                  onTap: () async {
+                    bool result = await context.read<SignupProvider>().signup(
+                          username.text,
+                          password.text,
+                          confirmPassword.text,
+                          email.text,
+                        );
+                    if (result){
+                      Navigator.pushNamed(context, '/home');
+                    }
+                  },
+                ),
                 const SizedBox(height: 16),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,

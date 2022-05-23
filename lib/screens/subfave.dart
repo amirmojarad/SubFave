@@ -50,7 +50,7 @@ class _SubfaveState extends State<Subfave> {
           ),
           headlineSmall: TextStyle(
             color: Color(0xff1B4332),
-            fontWeight: FontWeight.w700,
+            fontWeight: FontWeight.w400,
             fontSize: 16,
           ),
           headlineLarge: TextStyle(

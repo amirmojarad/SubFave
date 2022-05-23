@@ -22,16 +22,22 @@ class SearchProvider with ChangeNotifier {
 
   Future<void> queryMovies(String title) async {
     startLoading();
+    this.movies.clear();
     user ??= await User.loadFromSharedPreferences();
-    var res = await http.get(
-      Uri.parse("http://localhost:8080/movies/search/query/$title"),
+    Map<String, dynamic> jsonBodyRequest = {
+      "title": title,
+      "sort_by": "id",
+    };
+
+    var res = await http.post(
+      Uri.parse("http://localhost:8080/movies/search"),
       headers: {
         'Authorization': 'Bearer ${user.token}',
       },
+      body: jsonEncode(jsonBodyRequest),
     );
     int statusCode = res.statusCode;
-    List<dynamic> jsonBody = await jsonDecode(res.body);
-    if (statusCode == 200) {
+    if (statusCode == 200 || statusCode == 201 ) {
       final List<dynamic> responseData = jsonDecode(res.body);
       for (var item in responseData) {
         movies.add(Movie.fromJson(item));

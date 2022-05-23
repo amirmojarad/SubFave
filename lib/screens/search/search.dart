@@ -12,6 +12,7 @@ class SearchPage extends StatelessWidget {
   final TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    List<Movie> movies = context.watch<SearchProvider>().movies;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -25,64 +26,73 @@ class SearchPage extends StatelessWidget {
                     child: Column(
                       children: [
                         // Search Bar
-                        Expanded(
-                          flex: 1,
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width / 1.5,
-                            height: 150,
-                            child: TextField(
-                              controller: searchController,
-                              decoration: InputDecoration(
-                                prefixIcon: IconButton(
-                                  hoverColor: Colors.transparent,
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  iconSize: 30,
-                                  color: Theme.of(context).colorScheme.primary,
-                                  icon: const Icon(Icons.search),
-                                  onPressed: () async {
-                                    await context
-                                        .read<SearchProvider>()
-                                        .queryMovies(searchController.text);
-                                  },
+                        Center(
+                          child: Expanded(
+                            flex: 1,
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width / 1.5,
+                              child: TextField(
+                                controller: searchController,
+                                decoration: InputDecoration(
+                                  prefixIcon: IconButton(
+                                    hoverColor: Colors.transparent,
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    iconSize: 30,
+                                    color: Theme.of(context).colorScheme.primary,
+                                    icon: const Icon(Icons.search),
+                                    onPressed: () async {
+                                      await context
+                                          .read<SearchProvider>()
+                                          .queryMovies(searchController.text);
+                                    },
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color:
+                                            Theme.of(context).colorScheme.primary,
+                                        width: 2,
+                                      ),
+                                      borderRadius: BorderRadius.circular(16)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color:
+                                            Theme.of(context).colorScheme.primary,
+                                        width: 4,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12)),
                                 ),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(16)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      width: 4,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12)),
                               ),
                             ),
                           ),
                         ),
-                        SizedBox(
-                            width: MediaQuery.of(context).size.width / 1.5,
-                            height: MediaQuery.of(context).size.height / 2,
-                            child: Expanded(
-                              flex: 4,
+                        // Text(
+                        //   movies.isEmpty
+                        //       ? ""
+                        //       : "Result of " + searchController.text,
+                        //   style: Theme.of(context)
+                        //       .textTheme
+                        //       .headlineLarge!
+                        //       .copyWith(
+                        //         fontSize: 24,
+                        //       ),
+                        // ),
+                        Expanded(
+                          flex: 5,
+                          child: SizedBox(
+                              width: MediaQuery.of(context).size.width / 1.5,
+                              height: MediaQuery.of(context).size.height / 2,
                               child: ListView.builder(
-                                itemBuilder: (_, index) {
-                                  Movie movie = context
-                                      .watch<SearchProvider>()
-                                      .movies[index];
-                                  return SearchResultCard(movie: movie);
-                                },
-                                itemCount: context
-                                    .watch<SearchProvider>()
-                                    .movies
-                                    .length,
-                              ),
-                            ))
+                                  itemBuilder: (_, index) {
+                                    searchController.clear();
+                                    Movie movie = context
+                                        .watch<SearchProvider>()
+                                        .movies[index];
+                                    return SearchResultCard(movie: movie);
+                                  },
+                                  itemCount: movies.length)),
+                        )
                       ],
                     ),
                   ),
