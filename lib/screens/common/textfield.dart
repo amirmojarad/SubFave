@@ -28,7 +28,7 @@ class SubfaveTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(title),
+        Text(title, style: Theme.of(context).textTheme.headlineSmall),
         const SizedBox(height: 8),
         SizedBox(
           child: TextFormField(

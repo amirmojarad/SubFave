@@ -15,9 +15,6 @@ class SubfaveButton extends StatelessWidget {
           onTap: () async => onTap(),
           borderRadius: BorderRadius.circular(8),
           hoverColor: Theme.of(context).colorScheme.primary.withOpacity(0.2),
-          focusColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          splashColor: Colors.transparent,
           child: Center(
             child: Text(
               title,

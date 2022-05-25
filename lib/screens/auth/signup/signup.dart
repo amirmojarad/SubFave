@@ -4,6 +4,7 @@ import 'package:subfave/controllers/signup.dart';
 import 'package:subfave/screens/common/appbar.dart';
 import 'package:subfave/screens/common/button.dart';
 import 'package:subfave/screens/common/drawer.dart';
+import 'package:subfave/screens/common/email_form.dart';
 import 'package:subfave/screens/common/textfield.dart';
 
 class SignupPage extends StatelessWidget {
@@ -29,16 +30,11 @@ class SignupPage extends StatelessWidget {
                 const SizedBox(
                   height: 64,
                 ),
-                SubfaveTextField(
-                  passwordIsValid: false,
-                  passwordValidationText: "",
-                  validator: (value) => {},
-                  isPassword: false,
+                SubfaveEmailFormField(
+                  controller: email,
                   error: false,
                   errorText: "",
-                  hintText: "example@example.com",
-                  title: "Email",
-                  controller: email,
+                  validator: (value) => {},
                 ),
                 const SizedBox(height: 16),
                 SubfaveTextField(
@@ -95,7 +91,7 @@ class SignupPage extends StatelessWidget {
                           confirmPassword.text,
                           email.text,
                         );
-                    if (result){
+                    if (result) {
                       Navigator.pushNamed(context, '/home');
                     }
                   },
@@ -105,30 +101,29 @@ class SignupPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      "Already Have an Account?",
-                      style:
-                          Theme.of(context).textTheme.headlineSmall!.copyWith(
-                                fontWeight: FontWeight.w400,
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .primary
-                                    .withOpacity(0.9),
-                              ),
-                    ),
+                    Text("Already Have an Account?",
+                        style: Theme.of(context).textTheme.headlineSmall),
                     const SizedBox(
                       width: 6,
                     ),
-                    GestureDetector(
-                      onTap: () => Navigator.pushNamed(context, '/login'),
-                      child: Text(
-                        "Login",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineSmall
-                            ?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                decoration: TextDecoration.underline),
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: () => Navigator.pushNamed(context, '/login'),
+                        hoverColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        splashColor: Colors.transparent,
+                        child: Text(
+                          "Login",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall
+                              ?.copyWith(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  fontWeight: FontWeight.bold,
+                                  decoration: TextDecoration.underline),
+                        ),
                       ),
                     )
                   ],
