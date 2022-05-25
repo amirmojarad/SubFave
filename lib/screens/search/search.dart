@@ -14,6 +14,7 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Movie> movies = context.watch<SearchProvider>().movies;
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       endDrawer: SubfaveDrawer(),
       body: SafeArea(
         child: Padding(

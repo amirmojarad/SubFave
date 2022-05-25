@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:subfave/screens/common/logout_button.dart';
 import 'package:subfave/screens/common/subfave_card.dart';
 import 'package:subfave/screens/common/theme_button.dart';
 import 'package:subfave/screens/config.dart';
@@ -19,8 +19,7 @@ class SubfaveDrawer extends StatelessWidget {
           children: [
             const SubfaveCard(),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: const Divider(
@@ -47,6 +46,11 @@ class SubfaveDrawer extends StatelessWidget {
                 ],
               ),
             ),
+            const Spacer(),
+            const Padding(
+              padding: const EdgeInsets.only(bottom:32.0),
+              child: SubfaveLogoutButton(),
+            )
           ],
         ),
       ),
