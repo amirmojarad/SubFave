@@ -1,19 +1,30 @@
-
 import 'package:flutter/material.dart';
 
 class SubfaveCardItem extends StatelessWidget {
-  const SubfaveCardItem({Key? key, required this.title}) : super(key: key);
+  const SubfaveCardItem({Key? key, required this.title, required this.onTap})
+      : super(key: key);
   final String title;
+  final Function onTap;
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 300,
       height: 180,
-      child: Center(
-        child: Text(
-          title,
-          style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-              fontSize: 40, color: Theme.of(context).colorScheme.background),
+      child: Material(
+        borderRadius: BorderRadius.circular(12),
+        color: Theme.of(context).colorScheme.primary,
+        child: InkWell(
+          onTap: () => onTap(),
+          borderRadius: BorderRadius.circular(12),
+          hoverColor: Theme.of(context).colorScheme.primary.withOpacity(0.6),
+          child: Center(
+            child: Text(
+              title,
+              style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                  fontSize: 40,
+                  color: Theme.of(context).colorScheme.background),
+            ),
+          ),
         ),
       ),
       decoration: BoxDecoration(
@@ -23,7 +34,7 @@ class SubfaveCardItem extends StatelessWidget {
           BoxShadow(
             offset: const Offset(-3, 8),
             blurRadius: 1,
-            color: Colors.grey.withOpacity(0.9),
+            color: Colors.grey.withOpacity(0.4),
           ),
         ],
       ),

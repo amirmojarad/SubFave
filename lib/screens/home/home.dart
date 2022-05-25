@@ -31,12 +31,9 @@ class HomePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      GestureDetector(
+                      SubfaveCardItem(
                         onTap: () => Navigator.pushNamed(context, '/search'),
-                        child: SubfaveCardItem(
-                          title: "Search Movies",
-                          
-                        ),
+                        title: "Search Movies",
                       ),
                       // const SizedBox(width: 16),
                       // SubfaveCardItem(

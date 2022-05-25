@@ -60,7 +60,6 @@ class LoginPage extends StatelessWidget {
                                           passwordController.text,
                                         );
                                 if (isLoggedIn) {
-                                  // TODO Navigate to Main Menu Page
                                   Navigator.pushReplacementNamed(
                                       context, '/home');
                                 } else {}

@@ -15,7 +15,7 @@ class SearchPage extends StatelessWidget {
     List<Movie> movies = context.watch<SearchProvider>().movies;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      endDrawer: SubfaveDrawer(),
+      endDrawer: const SubfaveDrawer(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(top: 64),
