@@ -40,6 +40,7 @@ class LoginPage extends StatelessWidget {
                             errorText: "",
                             validator: (value) => {},
                           ),
+                          SizedBox(height: 16,),
                           SubfavePasswordFormField(
                             title: "Password",
                             controller: passwordController,
