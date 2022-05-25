@@ -18,7 +18,7 @@ class SubfaveEmailFormField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        const Text("Email"),
+        Text("Email", style: Theme.of(context).textTheme.headlineSmall),
         const SizedBox(height: 8),
         SizedBox(
           child: TextFormField(
@@ -38,6 +38,11 @@ class SubfaveEmailFormField extends StatelessWidget {
                 ),
               ),
               hintText: "example@example.com",
+              hintStyle: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                    color: Theme.of(context).hintColor,
+                    fontWeight: FontWeight.w300,
+                    fontSize: 14,
+                  ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(

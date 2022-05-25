@@ -48,7 +48,7 @@ class SubfaveDrawer extends StatelessWidget {
             ),
             const Spacer(),
             const Padding(
-              padding: const EdgeInsets.only(bottom:32.0),
+              padding: EdgeInsets.only(bottom: 32.0),
               child: SubfaveLogoutButton(),
             )
           ],

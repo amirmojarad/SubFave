@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:subfave/controllers/login.dart';
@@ -17,30 +16,30 @@ class RememberMe extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            GestureDetector(
-              onTap: () => context
-                  .read<LoginProvider>()
-                  .tapOnRememberMe(),
-              child: Container(
-                width: 15,
-                height: 15,
-                decoration:
-                    context.watch<LoginProvider>().rememberMe
-                        ? BoxDecoration(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .primary,
-                          )
-                        : BoxDecoration(
-                            border: Border.all(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .primary,
-                            ),
+            Material(
+              color: Colors.transparent,
+              child: InkWell(
+                hoverColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                onTap: () => context.read<LoginProvider>().tapOnRememberMe(),
+                child: Container(
+                  width: 15,
+                  height: 15,
+                  decoration: context.watch<LoginProvider>().rememberMe
+                      ? BoxDecoration(
+                          color: Theme.of(context).colorScheme.primary,
+                        )
+                      : BoxDecoration(
+                          border: Border.all(
+                            color: Theme.of(context).colorScheme.primary,
                           ),
+                        ),
+                ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 8,
             ),
             Text(
@@ -49,8 +48,23 @@ class RememberMe extends StatelessWidget {
             )
           ],
         ),
-        SizedBox(width: 150,),
-        Text("Forgot Password?")
+        const SizedBox(
+          width: 150,
+        ),
+        Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () {},
+            hoverColor: Colors.transparent,
+            focusColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            child: Text(
+              "Forgot Password?",
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+          ),
+        )
       ],
     );
   }

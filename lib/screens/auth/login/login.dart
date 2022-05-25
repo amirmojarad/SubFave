@@ -40,7 +40,9 @@ class LoginPage extends StatelessWidget {
                             errorText: "",
                             validator: (value) => {},
                           ),
-                          SizedBox(height: 16,),
+                          const SizedBox(
+                            height: 16,
+                          ),
                           SubfavePasswordFormField(
                             title: "Password",
                             controller: passwordController,
@@ -59,42 +61,44 @@ class LoginPage extends StatelessWidget {
                                         );
                                 if (isLoggedIn) {
                                   // TODO Navigate to Main Menu Page
-                                  Navigator.pushReplacementNamed(context,'/home');
-                                } else {
-
-                                }
+                                  Navigator.pushReplacementNamed(
+                                      context, '/home');
+                                } else {}
                               }),
                           const SizedBox(height: 16),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                "New To Subfave?",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineSmall!
-                                    .copyWith(
-                                      fontWeight: FontWeight.w400,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .primary
-                                          .withOpacity(0.9),
-                                    ),
-                              ),
+                              Text("New To Subfave?",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineSmall),
                               const SizedBox(
                                 width: 6,
                               ),
-                              GestureDetector(
-                                onTap: () => Navigator.pushNamed(context, '/'),
-                                child: Text(
-                                  "Sign Up",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineSmall
-                                      ?.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          decoration: TextDecoration.underline),
+                              Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                  hoverColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  splashColor: Colors.transparent,
+                                  onTap: () =>
+                                      Navigator.pushNamed(context, '/'),
+                                  child: Text(
+                                    "Sign Up",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineSmall
+                                        ?.copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary,
+                                            fontWeight: FontWeight.bold,
+                                            decoration:
+                                                TextDecoration.underline),
+                                  ),
                                 ),
                               )
                             ],

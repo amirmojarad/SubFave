@@ -39,7 +39,9 @@ class _SubfaveState extends State<Subfave> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         backgroundColor: light.backgroundColor,
+        hintColor: light.hint,
         colorScheme: const ColorScheme.light(
+          
           error: Color(0xffD12525),
           secondary: light.secondary,
           background: light.backgroundColor,
@@ -48,6 +50,8 @@ class _SubfaveState extends State<Subfave> {
         textTheme: lightFonts.textTheme,
       ),
       darkTheme: ThemeData(
+        hintColor: dark.hint,
+
         textTheme: darkFonts.textTheme,
         errorColor: const Color(0xffD12525),
         backgroundColor: dark.backgroundColor,

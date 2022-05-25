@@ -16,13 +16,18 @@ class SubfavePasswordFormField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(title),
+        Text(title, style: Theme.of(context).textTheme.headlineSmall),
         const SizedBox(height: 8),
         SizedBox(
           child: TextFormField(
             controller: controller,
             obscureText: true,
             decoration: InputDecoration(
+              hintStyle: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                    color: Theme.of(context).hintColor,
+                    fontWeight: FontWeight.w300,
+                    fontSize: 14,
+                  ),
               focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(4),
                 borderSide:
