@@ -20,7 +20,7 @@ class SignupPage extends StatelessWidget {
     return Scaffold(
       key: _key,
       drawer: const SubfaveDrawer(),
-      appBar: getAppBar(_key),
+      appBar: getAppBar(context,_key),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Center(

@@ -17,16 +17,6 @@ class SubfaveDrawer extends StatelessWidget {
         padding: const EdgeInsets.only(top: 16.0),
         child: Column(
           children: [
-            const SubfaveCard(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: const Divider(
-                  color: Colors.grey,
-                ),
-              ),
-            ),
             Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16),

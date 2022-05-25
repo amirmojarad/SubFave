@@ -21,8 +21,8 @@ class SubfaveCardItem extends StatelessWidget {
             child: Text(
               title,
               style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                  fontSize: 40,
-                  color: Theme.of(context).colorScheme.background),
+                    fontSize: 40,
+                  ),
             ),
           ),
         ),
@@ -34,7 +34,7 @@ class SubfaveCardItem extends StatelessWidget {
           BoxShadow(
             offset: const Offset(-3, 8),
             blurRadius: 1,
-            color: Colors.grey.withOpacity(0.4),
+            color: Theme.of(context).hintColor.withOpacity(0.2),
           ),
         ],
       ),

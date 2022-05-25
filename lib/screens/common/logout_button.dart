@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class SubfaveLogoutButton extends StatelessWidget {
@@ -8,20 +7,23 @@ class SubfaveLogoutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(decoration:BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: Theme.of(context).colorScheme.secondary,
-                width: 3,
-              ),
-              color: Theme.of(context).colorScheme.background,
-            ),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.primary,
+          width: 3,
+        ),
+        color: Theme.of(context).colorScheme.background,
+      ),
       child: Material(
+        color: Theme.of(context).colorScheme.background,
         borderRadius: BorderRadius.circular(16),
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
-          hoverColor: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
-          highlightColor: Theme.of(context).colorScheme.primary.withOpacity(0.4),
+          hoverColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+          highlightColor:
+              Theme.of(context).colorScheme.primary.withOpacity(0.4),
           onTap: () {
             Navigator.pushNamed(context, '/login');
           },
@@ -31,10 +33,9 @@ class SubfaveLogoutButton extends StatelessWidget {
             child: Center(
               child: Text(
                 "Logout",
-                style:
-                    Theme.of(context).textTheme.headlineMedium!.copyWith(
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
+                style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
               ),
             ),
           ),

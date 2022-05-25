@@ -1,10 +1,8 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 
-AppBar getAppBar(GlobalKey<ScaffoldState> _key) {
+AppBar getAppBar(BuildContext context,GlobalKey<ScaffoldState> _key) {
   return AppBar(
+    backgroundColor: Theme.of(context).backgroundColor,
     title: Text("Subfave"),
     actions: [
       IconButton(

@@ -24,6 +24,7 @@ class SubfaveEmailFormField extends StatelessWidget {
           child: TextFormField(
             validator: (value) => validator(value!),
             controller: controller,
+            style: Theme.of(context).textTheme.headlineSmall,
             decoration: InputDecoration(
               focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(4),

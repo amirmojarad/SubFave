@@ -42,7 +42,8 @@ class SearchPage extends StatelessWidget {
                                     focusColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     iconSize: 30,
-                                    color: Theme.of(context).colorScheme.primary,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                     icon: const Icon(Icons.search),
                                     onPressed: () async {
                                       await context
@@ -52,15 +53,17 @@ class SearchPage extends StatelessWidget {
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                        color:
-                                            Theme.of(context).colorScheme.primary,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
                                         width: 2,
                                       ),
                                       borderRadius: BorderRadius.circular(16)),
                                   enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                        color:
-                                            Theme.of(context).colorScheme.primary,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
                                         width: 4,
                                       ),
                                       borderRadius: BorderRadius.circular(12)),
@@ -102,7 +105,7 @@ class SearchPage extends StatelessWidget {
         ),
       ),
       key: _key,
-      appBar: getAppBar(_key),
+      appBar: getAppBar(context, _key),
       drawer: const SubfaveDrawer(),
     );
   }

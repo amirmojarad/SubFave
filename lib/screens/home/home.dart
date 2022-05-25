@@ -14,8 +14,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _key,
-      drawer: SubfaveDrawer(),
-      appBar: getAppBar(_key),
+      drawer: const SubfaveDrawer(),
+      appBar: getAppBar(context, _key),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: SingleChildScrollView(

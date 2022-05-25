@@ -20,6 +20,7 @@ class SubfavePasswordFormField extends StatelessWidget {
         const SizedBox(height: 8),
         SizedBox(
           child: TextFormField(
+            style: Theme.of(context).textTheme.headlineSmall,
             controller: controller,
             obscureText: true,
             decoration: InputDecoration(
