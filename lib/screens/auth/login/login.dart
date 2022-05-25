@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:subfave/controllers/login.dart';
 import 'package:subfave/screens/auth/login/remember_me.dart';
-import 'package:subfave/screens/common/appbar.dart';
 import 'package:subfave/screens/common/button.dart';
-import 'package:subfave/screens/common/drawer.dart';
 import 'package:subfave/screens/common/email_form.dart';
 import 'package:subfave/screens/common/password_form.dart';
 
@@ -18,12 +16,8 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var loading = context.watch<LoginProvider>().isLoading;
     return Scaffold(
-      key: _key,
-      drawer: const SubfaveDrawer(),
-      appBar: getAppBar(
-        context,
-        _key,
-      ),
+      // key: _key,
+      // drawer: const SubfaveDrawer(),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Center(
@@ -32,6 +26,18 @@ class LoginPage extends StatelessWidget {
                 ? const CircularProgressIndicator()
                 : Column(
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16.0, top: 16),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Subfave",
+                              style: Theme.of(context).textTheme.headlineMedium,
+                            ),
+                            Spacer(),
+                          ],
+                        ),
+                      ),
                       const SizedBox(
                         height: 64,
                       ),

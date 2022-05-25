@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:subfave/controllers/signup.dart';
-import 'package:subfave/screens/common/appbar.dart';
 import 'package:subfave/screens/common/button.dart';
 import 'package:subfave/screens/common/drawer.dart';
 import 'package:subfave/screens/common/email_form.dart';
@@ -19,14 +18,24 @@ class SignupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _key,
-      drawer: const SubfaveDrawer(),
-      appBar: getAppBar(context,_key),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
             child: Column(
               children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 16.0, top: 16),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Subfave",
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                      Spacer(),
+                    ],
+                  ),
+                ),
                 const SizedBox(
                   height: 64,
                 ),

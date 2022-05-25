@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:subfave/screens/common/appbar.dart';
 import 'package:subfave/screens/common/card_item.dart';
 import 'package:subfave/screens/common/drawer.dart';
-import 'package:subfave/screens/common/subfave_card.dart';
-import 'package:subfave/screens/config.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -15,7 +11,6 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       key: _key,
       drawer: const SubfaveDrawer(),
-      appBar: getAppBar(context, _key),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: SingleChildScrollView(

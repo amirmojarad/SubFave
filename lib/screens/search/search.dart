@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:subfave/controllers/search_movie.dart';
 import 'package:subfave/models/movie.dart';
-import 'package:subfave/screens/common/appbar.dart';
 import 'package:subfave/screens/common/drawer.dart';
 import 'package:subfave/screens/search/search_result_card.dart';
 
@@ -105,7 +104,6 @@ class SearchPage extends StatelessWidget {
         ),
       ),
       key: _key,
-      appBar: getAppBar(context, _key),
       drawer: const SubfaveDrawer(),
     );
   }
