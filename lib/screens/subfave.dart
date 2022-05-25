@@ -10,6 +10,11 @@ import 'package:subfave/screens/common/scroll.dart';
 import 'package:subfave/screens/config.dart';
 import 'package:subfave/screens/home/home.dart';
 import 'package:subfave/screens/search/search.dart';
+import 'package:subfave/screens/theme/dark/dark_theme.dart' as dark;
+import 'package:subfave/screens/theme/light/light_theme.dart' as light;
+import 'package:subfave/screens/theme/light/fonts.dart' as lightFonts;
+import 'package:subfave/screens/theme/dark/fonts.dart' as darkFonts;
+
 
 class Subfave extends StatefulWidget {
   const Subfave({Key? key}) : super(key: key);
@@ -33,34 +38,24 @@ class _SubfaveState extends State<Subfave> {
       scrollBehavior: MyCustomScrollBehavior(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        errorColor: const Color(0xffD12525),
-        backgroundColor: const Color(0xff1B4332),
-        snackBarTheme: const SnackBarThemeData(
-          backgroundColor: Color(0xff70DD45),
-        ),
+        backgroundColor: light.backgroundColor,
         colorScheme: const ColorScheme.light(
-          background: Color(0xffD8F3DC),
-          primary: Color(0xff1B4332),
+          error: Color(0xffD12525),
+          secondary: light.secondary,
+          background: light.backgroundColor,
+          primary: light.primaryColor,
         ),
-        textTheme: const TextTheme(
-          headlineMedium: TextStyle(
-            color: Color(0xff1B4332),
-            fontWeight: FontWeight.w700,
-            fontSize: 22,
-          ),
-          headlineSmall: TextStyle(
-            color: Color(0xff1B4332),
-            fontWeight: FontWeight.w400,
-            fontSize: 16,
-          ),
-          headlineLarge: TextStyle(
-            color: Color(0xff1B4332),
-            fontWeight: FontWeight.w900,
-            fontSize: 26,
-          ),
+        textTheme: lightFonts.textTheme,
+      ),
+      darkTheme: ThemeData(
+        textTheme: darkFonts.textTheme,
+        errorColor: const Color(0xffD12525),
+        backgroundColor: dark.backgroundColor,
+        colorScheme: const ColorScheme.light(
+          background: dark.backgroundColor,
+          primary: dark.primaryColor,
         ),
       ),
-      darkTheme: ThemeData.dark(),
       themeMode: currentTheme.currentTheme(),
       initialRoute: '/',
       routes: {
