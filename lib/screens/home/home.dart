@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:subfave/screens/common/appbar.dart';
 import 'package:subfave/screens/common/card_item.dart';
 import 'package:subfave/screens/common/drawer.dart';
 
@@ -8,41 +11,332 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        tooltip: "Add New Subtitle",
+        onPressed: () {},
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        child: Icon(
+          FeatherIcons.plus,
+          color: Theme.of(context).colorScheme.background,
+        ),
+      ),
       key: _key,
       drawer: const SubfaveDrawer(),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(32.0),
-            child: SizedBox(
-              height: 400,
-              width: MediaQuery.of(context).size.width,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SubfaveCardItem(
-                        onTap: () => Navigator.pushNamed(context, '/search'),
-                        title: "Search Movies",
+            padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 32),
+            child: Column(
+              children: [
+                SubfaveAppBar(
+                  scaffoldKey: _key,
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+                  child: SizedBox(
+                    child: Divider(),
+                    width: width,
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const LeftSideMenu(),
+                    SizedBox(
+                      child: VerticalDivider(),
+                      height: height,
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 16, top: 16, right: 16),
+                      child: Column(
+                        children: [
+                          HomeMiddleSectionHList(
+                            width: width,
+                            title: "Categories",
+                            list: const [
+                              FavoriteCategoryCard(
+                                title: "First",
+                              ),
+                              FavoriteCategoryCard(
+                                title: "Second",
+                              ),
+                              FavoriteCategoryCard(
+                                title: "Third",
+                              ),
+                              FavoriteCategoryCard(
+                                title: "4th",
+                              ),
+                              FavoriteCategoryCard(
+                                title: "5th",
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 32),
+                          HomeMiddleSectionHList(
+                            width: width,
+                            title: "Favorite Words",
+                            list: const [
+                              FavoriteCategoryCard(
+                                title: "First",
+                              ),
+                              FavoriteCategoryCard(
+                                title: "Second",
+                              ),
+                              FavoriteCategoryCard(
+                                title: "Third",
+                              ),
+                              FavoriteCategoryCard(
+                                title: "4th",
+                              ),
+                              FavoriteCategoryCard(
+                                title: "5th",
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 32),
+                          HomeMiddleSectionHList(
+                            width: width,
+                            title: "Favorite Movies",
+                            list: const [
+                              MovieCardItem(
+                                movieTitle: "Batman",
+                                imageURL:
+                                    'https://unsplash.com/photos/meqVd5zwylI/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8M3x8YmF0bWFufGVufDB8fHx8MTY1MzU3MTExNg&force=true&w=1920',
+                              ),
+                              MovieCardItem(
+                                movieTitle: "Batman",
+                                imageURL:
+                                    'https://unsplash.com/photos/meqVd5zwylI/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8M3x8YmF0bWFufGVufDB8fHx8MTY1MzU3MTExNg&force=true&w=1920',
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                      // const SizedBox(width: 16),
-                      // SubfaveCardItem(
-                      //   title: "Favorites",
-                      //   onTap: () {},
-                      // ),
-                      // SizedBox(width: 16),
-                      // SubfaveCardItem(title: "Vocabs", onTap: () {}),
-                      // SizedBox(width: 16),
-                      // SubfaveCardItem(title: "Upload Subtitle", onTap: () {}),
-                    ],
-                  )
-                ],
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class MovieCardItem extends StatelessWidget {
+  const MovieCardItem(
+      {Key? key, required this.imageURL, required this.movieTitle})
+      : super(key: key);
+  final String movieTitle;
+  final String imageURL;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 8.0),
+      child: Tooltip(
+        message: movieTitle,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: Material(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(16),
+            child: InkWell(
+              onTap: () {},
+              borderRadius: BorderRadius.circular(16),
+              child: Image.network(
+                imageURL,
+                width: 200,
+                height: 200,
+                fit: BoxFit.cover,
               ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class HomeMiddleSectionHList extends StatelessWidget {
+  const HomeMiddleSectionHList(
+      {Key? key, required this.width, required this.list, required this.title})
+      : super(key: key);
+  final String title;
+  final List<Widget> list;
+  final double width;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+        SizedBox(
+          child: Divider(),
+          width: width - 280,
+        ),
+        SizedBox(
+          width: width - 280,
+          height: 100,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: ListView.builder(
+              itemCount: list.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (BuildContext context, int index) {
+                return list[index];
+              },
+            ),
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class LeftSideMenu extends StatelessWidget {
+  const LeftSideMenu({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        LeftSideBarButton(
+          isSelected: true,
+          icon: FeatherIcons.home,
+          title: "Home",
+          onTap: () => Navigator.pushNamed(context, '/home'),
+        ),
+        const SizedBox(height: 32),
+        LeftSideBarButton(
+          onTap: () => Navigator.pushNamed(context, '/search'),
+          isSelected: false,
+          icon: FeatherIcons.search,
+          title: "Search",
+        ),
+        const SizedBox(height: 32),
+        LeftSideBarButton(
+          onTap: () {},
+          isSelected: false,
+          icon: FeatherIcons.grid,
+          title: "College",
+        ),
+        SizedBox(height: 32),
+        LeftSideBarButton(
+          onTap: () {},
+          isSelected: false,
+          icon: FeatherIcons.film,
+          title: "My Movies",
+        ),
+      ],
+    );
+  }
+}
+
+class FavoriteCategoryCard extends StatelessWidget {
+  const FavoriteCategoryCard({Key? key, required this.title}) : super(key: key);
+  final String title;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 8.0),
+      child: Container(
+        width: 200,
+        height: 100,
+        child: Material(
+          borderRadius: BorderRadius.circular(16),
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(16),
+            onTap: () {},
+            child: Center(
+              child: Text(
+                title,
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+            ),
+          ),
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: Theme.of(context).colorScheme.primary,
+            width: 1.2,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class LeftSideBarButton extends StatelessWidget {
+  const LeftSideBarButton({
+    Key? key,
+    required this.isSelected,
+    required this.icon,
+    required this.title,
+    required this.onTap,
+  }) : super(key: key);
+  final bool isSelected;
+  final String title;
+  final IconData icon;
+  final Function onTap;
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      borderRadius: BorderRadius.circular(16),
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(16),
+        onTap: () => onTap(),
+        focusColor: Colors.transparent,
+        hoverColor: Theme.of(context).colorScheme.primary.withOpacity(0.4),
+        child: SizedBox(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(
+                  icon,
+                  size: 24,
+                  color: isSelected
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(context).colorScheme.secondary,
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    title,
+                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                          fontSize: 20,
+                          color: isSelected
+                              ? Theme.of(context).colorScheme.primary
+                              : Theme.of(context).colorScheme.secondary,
+                        ),
+                  ),
+                )
+              ],
             ),
           ),
         ),

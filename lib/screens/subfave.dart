@@ -15,7 +15,6 @@ import 'package:subfave/screens/theme/light/light_theme.dart' as light;
 import 'package:subfave/screens/theme/light/fonts.dart' as lightFonts;
 import 'package:subfave/screens/theme/dark/fonts.dart' as darkFonts;
 
-
 class Subfave extends StatefulWidget {
   const Subfave({Key? key}) : super(key: key);
 
@@ -40,8 +39,8 @@ class _SubfaveState extends State<Subfave> {
       theme: ThemeData(
         backgroundColor: light.backgroundColor,
         hintColor: light.hint,
+        dividerColor: light.divider,
         colorScheme: const ColorScheme.light(
-          
           error: Color(0xffD12525),
           secondary: light.secondary,
           background: light.backgroundColor,
@@ -51,12 +50,12 @@ class _SubfaveState extends State<Subfave> {
       ),
       darkTheme: ThemeData(
         hintColor: dark.hint,
-
         textTheme: darkFonts.textTheme,
-        errorColor: const Color(0xffD12525),
         backgroundColor: dark.backgroundColor,
-        colorScheme: const ColorScheme.light(
+        colorScheme: const ColorScheme.dark(
           background: dark.backgroundColor,
+          secondary: dark.secondary,
+          error: dark.error,
           primary: dark.primaryColor,
         ),
       ),
@@ -78,7 +77,8 @@ class _SubfaveState extends State<Subfave> {
         '/search': (context) => ChangeNotifierProvider(
               create: (context) => SearchProvider(),
               child: SearchPage(),
-            )
+            ),
+          
       },
     );
   }
