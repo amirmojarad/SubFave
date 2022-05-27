@@ -12,7 +12,6 @@ class SubfaveLogoutButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: Theme.of(context).colorScheme.primary,
-          width: 3,
         ),
         color: Theme.of(context).colorScheme.background,
       ),
@@ -28,12 +27,12 @@ class SubfaveLogoutButton extends StatelessWidget {
             Navigator.pushNamed(context, '/login');
           },
           child: SizedBox(
-            width: 200,
-            height: 75,
+            width: 100,
+            height: 50,
             child: Center(
               child: Text(
                 "Logout",
-                style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                       color: Theme.of(context).colorScheme.primary,
                     ),
               ),

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
-import 'package:provider/provider.dart';
-import 'package:subfave/controllers/left_side_menu.dart';
 import 'package:subfave/screens/common/appbar.dart';
 import 'package:subfave/screens/common/drawer.dart';
 import 'package:subfave/screens/common/left_side_menu.dart';
+import 'package:subfave/screens/home/favorite_category_card.dart';
+import 'package:subfave/screens/home/movie_item_card.dart';
+import 'package:subfave/screens/home/section.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -47,7 +48,7 @@ class HomePage extends StatelessWidget {
                           const EdgeInsets.only(left: 16, top: 16, right: 16),
                       child: Column(
                         children: [
-                          HomeMiddleSectionHList(
+                          SubfaveSectionHeader(
                             width: width,
                             title: "Categories",
                             list: const [
@@ -69,7 +70,7 @@ class HomePage extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(height: 32),
-                          HomeMiddleSectionHList(
+                          SubfaveSectionHeader(
                             width: width,
                             title: "Favorite Words",
                             list: const [
@@ -91,7 +92,7 @@ class HomePage extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(height: 32),
-                          HomeMiddleSectionHList(
+                          SubfaveSectionHeader(
                             width: width,
                             title: "Favorite Movies",
                             list: const [
@@ -114,117 +115,6 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class MovieCardItem extends StatelessWidget {
-  const MovieCardItem(
-      {Key? key, required this.imageURL, required this.movieTitle})
-      : super(key: key);
-  final String movieTitle;
-  final String imageURL;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 8.0),
-      child: Tooltip(
-        message: movieTitle,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: Material(
-            color: Colors.transparent,
-            borderRadius: BorderRadius.circular(16),
-            child: InkWell(
-              onTap: () {},
-              borderRadius: BorderRadius.circular(16),
-              child: Image.network(
-                imageURL,
-                width: 200,
-                height: 200,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class HomeMiddleSectionHList extends StatelessWidget {
-  const HomeMiddleSectionHList(
-      {Key? key, required this.width, required this.list, required this.title})
-      : super(key: key);
-  final String title;
-  final List<Widget> list;
-  final double width;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: Theme.of(context).textTheme.headlineMedium,
-        ),
-        SizedBox(
-          child: Divider(),
-          width: width - 280,
-        ),
-        SizedBox(
-          width: width - 280,
-          height: 100,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: ListView.builder(
-              itemCount: list.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (BuildContext context, int index) {
-                return list[index];
-              },
-            ),
-          ),
-        )
-      ],
-    );
-  }
-}
-
-class FavoriteCategoryCard extends StatelessWidget {
-  const FavoriteCategoryCard({Key? key, required this.title}) : super(key: key);
-  final String title;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 8.0),
-      child: Container(
-        width: 200,
-        height: 100,
-        child: Material(
-          borderRadius: BorderRadius.circular(16),
-          color: Colors.transparent,
-          child: InkWell(
-            borderRadius: BorderRadius.circular(16),
-            onTap: () {},
-            child: Center(
-              child: Text(
-                title,
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-            ),
-          ),
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: Theme.of(context).colorScheme.primary,
-            width: 1.2,
           ),
         ),
       ),
