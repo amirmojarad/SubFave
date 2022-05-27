@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:subfave/controllers/home.dart';
+import 'package:subfave/controllers/left_side_menu.dart';
 import 'package:subfave/controllers/login.dart';
 import 'package:subfave/controllers/search_movie.dart';
 import 'package:subfave/controllers/signup.dart';
@@ -30,7 +31,7 @@ class _SubfaveState extends State<Subfave> {
       setState(() {});
     });
   }
-
+  LeftSideMenuProvider leftSideMenuProvider = LeftSideMenuProvider();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -70,15 +71,28 @@ class _SubfaveState extends State<Subfave> {
               create: (context) => LoginProvider(),
               child: LoginPage(),
             ),
-        '/home': (context) => ChangeNotifierProvider(
-              create: (context) => HomeProvider(),
+        '/home': (context) => MultiProvider(
+              providers: [
+                ChangeNotifierProvider(
+                  create: (context) => leftSideMenuProvider,
+                ),
+                ChangeNotifierProvider(
+                  create: (context) => HomeProvider(),
+                )
+              ],
               child: HomePage(),
             ),
-        '/search': (context) => ChangeNotifierProvider(
-              create: (context) => SearchProvider(),
+        '/search': (context) => MultiProvider(
+              providers: [
+                ChangeNotifierProvider(
+                  create: (context) => leftSideMenuProvider,
+                ),
+                ChangeNotifierProvider(
+                  create: (context) => SearchProvider(),
+                )
+              ],
               child: SearchPage(),
             ),
-          
       },
     );
   }

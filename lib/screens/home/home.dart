@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:provider/provider.dart';
+import 'package:subfave/controllers/left_side_menu.dart';
 import 'package:subfave/screens/common/appbar.dart';
 import 'package:subfave/screens/common/drawer.dart';
 import 'package:subfave/screens/common/left_side_menu.dart';
@@ -39,7 +41,7 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const LeftSideMenu(),
+                    LeftSideMenu(),
                     Padding(
                       padding:
                           const EdgeInsets.only(left: 16, top: 16, right: 16),

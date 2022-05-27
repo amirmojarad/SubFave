@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:provider/provider.dart';
+import 'package:subfave/controllers/left_side_menu.dart';
 import 'package:subfave/screens/common/left_side_bar_button.dart';
 
 class LeftSideMenu extends StatelessWidget {
-  const LeftSideMenu({
-    Key? key,
-  }) : super(key: key);
-
+  const LeftSideMenu({Key? key}) : super(key: key);
+  final double heightBetweenItems = 16;
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -19,29 +19,35 @@ class LeftSideMenu extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             LeftSideBarButton(
-              isSelected: true,
+              isSelected: 0 == context.read<LeftSideMenuProvider>().isSelected,
               icon: FeatherIcons.home,
               title: "Home",
-              onTap: () => Navigator.pushNamed(context, '/home'),
+              onTap: () {
+                context.read<LeftSideMenuProvider>().chageSelectedValue(0);
+                Navigator.pushNamed(context, '/home');
+              },
             ),
-            const SizedBox(height: 32),
+            SizedBox(height: heightBetweenItems),
             LeftSideBarButton(
-              onTap: () => Navigator.pushNamed(context, '/search'),
-              isSelected: false,
+              onTap: () {
+                context.read<LeftSideMenuProvider>().chageSelectedValue(1);
+                Navigator.pushNamed(context, '/search');
+              },
+              isSelected: 1 == context.read<LeftSideMenuProvider>().isSelected,
               icon: FeatherIcons.search,
               title: "Search",
             ),
-            const SizedBox(height: 32),
+            SizedBox(height: heightBetweenItems),
             LeftSideBarButton(
               onTap: () {},
-              isSelected: false,
+              isSelected: 2 == context.read<LeftSideMenuProvider>().isSelected,
               icon: FeatherIcons.grid,
               title: "College",
             ),
-            SizedBox(height: 32),
+            SizedBox(height: heightBetweenItems),
             LeftSideBarButton(
               onTap: () {},
-              isSelected: false,
+              isSelected: 3 == context.read<LeftSideMenuProvider>().isSelected,
               icon: FeatherIcons.film,
               title: "My Movies",
             ),
