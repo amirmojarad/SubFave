@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:subfave/screens/common/appbar.dart';
-import 'package:subfave/screens/common/card_item.dart';
 import 'package:subfave/screens/common/drawer.dart';
+import 'package:subfave/screens/common/left_side_menu.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -36,23 +35,11 @@ class HomePage extends StatelessWidget {
                 SubfaveAppBar(
                   scaffoldKey: _key,
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                  child: SizedBox(
-                    child: Divider(),
-                    width: width,
-                  ),
-                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const LeftSideMenu(),
-                    SizedBox(
-                      child: VerticalDivider(),
-                      height: height,
-                    ),
                     Padding(
                       padding:
                           const EdgeInsets.only(left: 16, top: 16, right: 16),
@@ -207,49 +194,6 @@ class HomeMiddleSectionHList extends StatelessWidget {
   }
 }
 
-class LeftSideMenu extends StatelessWidget {
-  const LeftSideMenu({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        LeftSideBarButton(
-          isSelected: true,
-          icon: FeatherIcons.home,
-          title: "Home",
-          onTap: () => Navigator.pushNamed(context, '/home'),
-        ),
-        const SizedBox(height: 32),
-        LeftSideBarButton(
-          onTap: () => Navigator.pushNamed(context, '/search'),
-          isSelected: false,
-          icon: FeatherIcons.search,
-          title: "Search",
-        ),
-        const SizedBox(height: 32),
-        LeftSideBarButton(
-          onTap: () {},
-          isSelected: false,
-          icon: FeatherIcons.grid,
-          title: "College",
-        ),
-        SizedBox(height: 32),
-        LeftSideBarButton(
-          onTap: () {},
-          isSelected: false,
-          icon: FeatherIcons.film,
-          title: "My Movies",
-        ),
-      ],
-    );
-  }
-}
-
 class FavoriteCategoryCard extends StatelessWidget {
   const FavoriteCategoryCard({Key? key, required this.title}) : super(key: key);
   final String title;
@@ -279,65 +223,6 @@ class FavoriteCategoryCard extends StatelessWidget {
           border: Border.all(
             color: Theme.of(context).colorScheme.primary,
             width: 1.2,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class LeftSideBarButton extends StatelessWidget {
-  const LeftSideBarButton({
-    Key? key,
-    required this.isSelected,
-    required this.icon,
-    required this.title,
-    required this.onTap,
-  }) : super(key: key);
-  final bool isSelected;
-  final String title;
-  final IconData icon;
-  final Function onTap;
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      borderRadius: BorderRadius.circular(16),
-      color: Colors.transparent,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(16),
-        onTap: () => onTap(),
-        focusColor: Colors.transparent,
-        hoverColor: Theme.of(context).colorScheme.primary.withOpacity(0.4),
-        child: SizedBox(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(
-                  icon,
-                  size: 24,
-                  color: isSelected
-                      ? Theme.of(context).colorScheme.primary
-                      : Theme.of(context).colorScheme.secondary,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Text(
-                    title,
-                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                          fontSize: 20,
-                          color: isSelected
-                              ? Theme.of(context).colorScheme.primary
-                              : Theme.of(context).colorScheme.secondary,
-                        ),
-                  ),
-                )
-              ],
-            ),
           ),
         ),
       ),

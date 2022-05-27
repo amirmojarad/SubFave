@@ -11,36 +11,49 @@ class SubfaveAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
+    var width = MediaQuery.of(context).size.width;
+    return Column(
       children: [
-        RotatedBox(
-          quarterTurns: 1,
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              focusColor: Colors.transparent,
-              onTap: () => scaffoldKey.currentState?.openDrawer(),
-              child: const Icon(
-                FeatherIcons.barChart2,
-                size: 30,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            RotatedBox(
+              quarterTurns: 1,
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  focusColor: Colors.transparent,
+                  onTap: () => scaffoldKey.currentState?.openDrawer(),
+                  child: const Icon(
+                    FeatherIcons.barChart2,
+                    size: 30,
+                  ),
+                ),
               ),
             ),
-          ),
+            Container(
+              child: const Icon(
+                Icons.person,
+                size: 40,
+              ),
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.secondary,
+                borderRadius: BorderRadius.circular(50),
+              ),
+            ),
+          ],
         ),
-        Container(
-          child: Icon(
-            Icons.person,
-            size: 40,
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+          child: SizedBox(
+            child: const Divider(),
+            width: width,
+            height: 0,
           ),
-          width: 60,
-          height: 60,
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondary,
-            borderRadius: BorderRadius.circular(50),
-          ),
-        ),
+        )
       ],
     );
   }
