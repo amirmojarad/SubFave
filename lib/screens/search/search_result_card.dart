@@ -11,9 +11,13 @@ class SearchResultCard extends StatelessWidget {
   const SearchResultCard({
     Key? key,
     required this.movie,
+    required this.tappedOnFavorite,
+    required this.isFavorite
   }) : super(key: key);
 
   final Movie movie;
+  final Function isFavorite;
+  final Function(Movie movie) tappedOnFavorite;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -164,17 +168,17 @@ class SearchResultCard extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              SizedBox(
-                                child: IconButton(
-                                  iconSize: 35,
-                                  icon: Icon(
-                                    Icons.favorite_border_rounded,
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                  ),
-                                  onPressed: () {},
-                                ),
-                              )
+                              // SizedBox(
+                              //   child: IconButton(
+                              //     iconSize: 35,
+                              //     icon: Icon(
+                              //       isFavorite() ? FeatherIcons.heart : Icons.favorite,
+                              //       color:
+                              //           Theme.of(context).colorScheme.primary,
+                              //     ),
+                              //     onPressed: () => tappedOnFavorite(movie),
+                              //   ),
+                              // )
                             ],
                           ),
                         ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:subfave/controllers/left_side_menu.dart';
 import 'package:subfave/controllers/search_movie.dart';
 import 'package:subfave/models/movie.dart';
 import 'package:subfave/screens/common/appbar.dart';
@@ -42,43 +41,119 @@ class SearchPage extends StatelessWidget {
                             children: [
                               SizedBox(
                                 width: MediaQuery.of(context).size.width / 1.5,
-                                child: TextField(
-                                  controller: searchController,
-                                  decoration: InputDecoration(
-                                    prefixIcon: IconButton(
-                                      hoverColor: Colors.transparent,
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      iconSize: 30,
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      icon: const Icon(Icons.search),
-                                      onPressed: () async {
-                                        await context
+                                child: Column(
+                                  children: [
+                                    TextField(
+                                      onTap: () {
+                                        context
                                             .read<SearchProvider>()
-                                            .queryMovies(searchController.text);
+                                            .getSearchHistory();
                                       },
+                                      controller: searchController,
+                                      decoration: InputDecoration(
+                                        prefixIcon: IconButton(
+                                          hoverColor: Colors.transparent,
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          iconSize: 30,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                          icon: const Icon(Icons.search),
+                                          onPressed: () async {
+                                            await context
+                                                .read<SearchProvider>()
+                                                .queryMovies(
+                                                    searchController.text);
+                                          },
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                              width: 2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(16)),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                              width: 4,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(12)),
+                                      ),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium!
+                                          .copyWith(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w600,
+                                          ),
                                     ),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary,
-                                          width: 2,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(16)),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary,
-                                          width: 4,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(12)),
-                                  ),
+                                    context
+                                            .read<SearchProvider>()
+                                            .movies
+                                            .isEmpty
+                                        ? SizedBox(
+                                            height: 500,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 8.0),
+                                              child: Container(
+                                                width: MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        1.5 -
+                                                    10,
+                                                child: ListView.builder(
+                                                  itemCount: context
+                                                      .read<SearchProvider>()
+                                                      .searchHistory
+                                                      .length,
+                                                  itemBuilder:
+                                                      (context, index) =>
+                                                          Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        context
+                                                            .read<
+                                                                SearchProvider>()
+                                                            .searchHistory[index],
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .headlineSmall,
+                                                      ),
+                                                      SizedBox(
+                                                        child: const Divider(),
+                                                        width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width /
+                                                                1.5 -
+                                                            10,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(4),
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        : Container(),
+                                  ],
                                 ),
                               ),
                               SizedBox(
@@ -92,7 +167,17 @@ class SearchPage extends StatelessWidget {
                                         Movie movie = context
                                             .watch<SearchProvider>()
                                             .movies[index];
-                                        return SearchResultCard(movie: movie);
+                                        return SearchResultCard(
+                                          movie: movie,
+                                          isFavorite: () => context
+                                              .read<SearchProvider>()
+                                              .checkMovieIsFavorited(movie),
+                                          tappedOnFavorite: (moviePassed) =>
+                                              context
+                                                  .read<SearchProvider>()
+                                                  .tappedOnFavoriteButton(
+                                                      moviePassed),
+                                        );
                                       },
                                       itemCount: movies.length))
                             ],
