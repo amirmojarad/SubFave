@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:subfave/controllers/upload.dart';
 import 'package:subfave/screens/common/appbar.dart';
 import 'package:subfave/screens/common/drawer.dart';
 import 'package:subfave/screens/common/left_side_menu.dart';
@@ -14,11 +15,13 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-        return Scaffold(
+    return Scaffold(
       floatingActionButton: FloatingActionButton(
         tooltip: "Add New Subtitle",
-        onPressed: () {},
+        onPressed: () async {
+          Upload upload = Upload();
+          upload.uploadSubtitle();
+        },
         backgroundColor: Theme.of(context).colorScheme.primary,
         child: Icon(
           FeatherIcons.plus,

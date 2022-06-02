@@ -29,6 +29,8 @@ class SignupProvider extends SubfaveMainProvider {
     var res = await super.postRequest(body, url);
     var statusCode = res.statusCode;
     print(statusCode);
+    print(res.body);
+
     if (statusCode == 201 || statusCode == 200) {
       User newUser = User.fromJson(jsonDecode(res.body));
       await newUser.save('user', newUser.toJson());
