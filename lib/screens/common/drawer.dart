@@ -47,8 +47,8 @@ class SubfaveDrawer extends StatelessWidget {
                   )
                 ],
               ),
-              Spacer(),
-              SubfaveLogoutButton()
+              // Spacer(),
+              // SubfaveLogoutButton()
             ],
           ),
         ),

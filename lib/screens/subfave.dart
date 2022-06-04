@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:subfave/controllers/home.dart';
 import 'package:subfave/controllers/left_side_menu.dart';
 import 'package:subfave/controllers/login.dart';
+import 'package:subfave/controllers/profile.dart';
 import 'package:subfave/controllers/search_movie.dart';
 import 'package:subfave/controllers/signup.dart';
 import 'package:subfave/screens/auth/login/login.dart';
@@ -10,6 +11,7 @@ import 'package:subfave/screens/auth/signup/signup.dart';
 import 'package:subfave/screens/common/scroll.dart';
 import 'package:subfave/screens/config.dart';
 import 'package:subfave/screens/home/home.dart';
+import 'package:subfave/screens/profile/profile.dart';
 import 'package:subfave/screens/search/search.dart';
 import 'package:subfave/screens/theme/dark/dark_theme.dart' as dark;
 import 'package:subfave/screens/theme/light/light_theme.dart' as light;
@@ -70,6 +72,17 @@ class _SubfaveState extends State<Subfave> {
         '/': (context) => ChangeNotifierProvider(
               create: (context) => SignupProvider(),
               child: SignupPage(),
+            ),
+        '/profile': (context) => MultiProvider(
+              providers: [
+                ChangeNotifierProvider(
+                  create: (context) => leftSideMenuProvider,
+                ),
+                ChangeNotifierProvider(
+                  create: (context) => ProfileProvider(),
+                )
+              ],
+              child: ProfileScreen(),
             ),
         '/login': (context) => ChangeNotifierProvider(
               create: (context) => LoginProvider(),

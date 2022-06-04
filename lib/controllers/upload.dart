@@ -10,6 +10,11 @@ class Upload {
     return result!.files.first;
   }
 
+  Future<bool> uploadImage() async {
+    final file = await _openFilePicker();
+    return true; 
+  }
+
   Future<bool> uploadSubtitle() async {
     user ??= await User.loadFromSharedPreferences();
     final file = await _openFilePicker();
