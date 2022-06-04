@@ -31,6 +31,7 @@ class _SubfaveState extends State<Subfave> {
       setState(() {});
     });
   }
+
   LeftSideMenuProvider leftSideMenuProvider = LeftSideMenuProvider();
   @override
   Widget build(BuildContext context) {
@@ -38,6 +39,9 @@ class _SubfaveState extends State<Subfave> {
       scrollBehavior: MyCustomScrollBehavior(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        bottomSheetTheme: const BottomSheetThemeData(
+          backgroundColor: Colors.transparent,
+        ),
         backgroundColor: light.backgroundColor,
         hintColor: light.hint,
         dividerColor: light.divider,
