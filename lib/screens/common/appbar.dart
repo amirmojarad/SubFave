@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:subfave/screens/common/profile_menu.dart';
 
 class SubfaveAppBar extends StatelessWidget {
   const SubfaveAppBar({
@@ -38,54 +39,7 @@ class SubfaveAppBar extends StatelessWidget {
                 child: InkWell(
                   borderRadius: BorderRadius.circular(50),
                   onTap: () {
-                    showMenu(
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(16.0),
-                        ),
-                      ),
-                      context: context,
-                      position:
-                          RelativeRect.fromLTRB(width - 50, 100, 40, 1000),
-                      items: [
-                        PopupMenuItem(
-                          child: GestureDetector(
-                            onTap: () {
-                              
-                              Navigator.pushNamed(context, '/profile');
-                            },
-                            child: Center(
-                              child: Text(
-                                "Profile",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineSmall!
-                                    .copyWith(
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        PopupMenuItem(
-                            child: GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, '/login');
-                          },
-                          child: Center(
-                            child: Text(
-                              "Logout",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineSmall!
-                                  .copyWith(
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                            ),
-                          ),
-                        )),
-                      ],
-                    );
+                    showProfileMenu(context, width);
                   },
                   child: const Icon(
                     Icons.person,

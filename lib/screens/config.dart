@@ -6,4 +6,3 @@ import 'package:subfave/models/user.dart';
 
 ThemeProvider currentTheme = ThemeProvider();
 var box;
-var user;

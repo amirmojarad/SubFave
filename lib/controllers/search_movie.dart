@@ -24,7 +24,7 @@ class SearchProvider with ChangeNotifier {
   Future<void> queryMovies(String title) async {
     startLoading();
     this.movies.clear();
-    user ??= await User.loadFromSharedPreferences();
+    user.loadUser();
     Map<String, dynamic> jsonBodyRequest = {
       "title": title,
       "sort_by": "id",

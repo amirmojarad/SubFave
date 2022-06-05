@@ -12,11 +12,11 @@ class Upload {
 
   Future<bool> uploadImage() async {
     final file = await _openFilePicker();
-    return true; 
+    return true;
   }
 
   Future<bool> uploadSubtitle() async {
-    user ??= await User.loadFromSharedPreferences();
+    user.loadUser();
     final file = await _openFilePicker();
     var headers = {
       'Authorization': 'Bearer ${user.token}',
