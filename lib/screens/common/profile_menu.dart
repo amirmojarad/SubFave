@@ -18,7 +18,7 @@ showProfileMenu(BuildContext context, double width) {
     items: [
       PopupMenuItem(
         child: GestureDetector(
-          onTap: () async {
+          onTap: () {
             Navigator.pushNamed(context, '/profile');
           },
           child: Text(

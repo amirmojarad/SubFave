@@ -42,7 +42,7 @@ class LeftSideMenu extends StatelessWidget {
               onTap: () {},
               isSelected: 2 == context.read<LeftSideMenuProvider>().isSelected,
               icon: FeatherIcons.grid,
-              title: "College",
+              title: "Collections",
             ),
             SizedBox(height: heightBetweenItems),
             LeftSideBarButton(

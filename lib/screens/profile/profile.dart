@@ -2,13 +2,15 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:provider/provider.dart';
+import 'package:subfave/controllers/profile.dart';
 import 'package:subfave/controllers/upload.dart';
 import 'package:subfave/models/user.dart';
 import 'package:subfave/screens/common/appbar.dart';
 import 'package:subfave/screens/common/button.dart';
+import 'package:subfave/screens/common/drawer.dart';
 import 'package:subfave/screens/common/left_side_menu.dart';
 import 'package:subfave/screens/common/textfield.dart';
-import 'package:subfave/screens/config.dart';
 import 'package:http/http.dart' as http;
 
 class ProfileScreen extends StatelessWidget {
@@ -18,15 +20,21 @@ class ProfileScreen extends StatelessWidget {
       lastName = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    print(user.imageUrl);
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      key: _key,
+      drawer: const SubfaveDrawer(),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: FutureBuilder(
           future: user.loadUser(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              String firstNameHint = user.fullName.split(" ")[0];
-              String lastNameHint = user.fullName.split(" ")[1];
+              String firstNameHint = "", lastNameHint = "";
+              if (user.fullName.isNotEmpty) {
+                firstNameHint = user.fullName.split(" ")[0];
+                lastNameHint = user.fullName.split(" ")[1];
+              }
               return SafeArea(
                 child: SingleChildScrollView(
                   child: Padding(
@@ -59,7 +67,9 @@ class ProfileScreen extends StatelessWidget {
                                                 borderRadius:
                                                     BorderRadius.circular(100),
                                                 child: Image.network(
-                                                  'https://unsplash.com/photos/rDEOVtE7vOs/download?force=true&w=1920',
+                                                  user.imageUrl == ""
+                                                      ? "https://unsplash.com/photos/DCqAn1JtmQg/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjU0NDk2OTAz&force=true&w=1920"
+                                                      : user.imageUrl,
                                                   width: 150,
                                                   height: 150,
                                                   fit: BoxFit.cover,
@@ -91,8 +101,9 @@ class ProfileScreen extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(16),
                                               onTap: () {
-                                                Upload upload = Upload();
-                                                upload.uploadImage();
+                                                context
+                                                    .read<ProfileProvider>()
+                                                    .uploadImage();
                                               },
                                               child: Icon(
                                                 FeatherIcons.edit2,

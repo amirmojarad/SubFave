@@ -5,6 +5,7 @@ import 'package:subfave/models/subfave.dart';
 
 class User extends SubfaveSuperModel {
   final String username, token, email, fullName;
+  String imageUrl;
   final int id;
   User.withData({
     required this.email,
@@ -12,6 +13,7 @@ class User extends SubfaveSuperModel {
     required this.username,
     required this.id,
     required this.fullName,
+    required this.imageUrl,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -21,6 +23,7 @@ class User extends SubfaveSuperModel {
       token: json["token"],
       username: json["user"]["username"],
       id: json["user"]["id"],
+      imageUrl: json["user"]["image_url"] ?? "",
     );
   }
 
@@ -36,7 +39,8 @@ class User extends SubfaveSuperModel {
         "email": email,
         "username": username,
         "id": id,
-        "full_name": fullName
+        "full_name": fullName,
+        "image_url": imageUrl,
       }
     };
   }
@@ -54,4 +58,4 @@ class User extends SubfaveSuperModel {
 }
 
 User user =
-    User.withData(email: "", token: "", username: "", id: -1, fullName: "");
+    User.withData(email: "", token: "", username: "", id: -1, fullName: "", imageUrl: "");

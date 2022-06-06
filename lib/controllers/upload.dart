@@ -1,6 +1,7 @@
+import 'dart:convert';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:subfave/models/user.dart';
-import 'package:subfave/screens/config.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
@@ -10,10 +11,6 @@ class Upload {
     return result!.files.first;
   }
 
-  Future<bool> uploadImage() async {
-    final file = await _openFilePicker();
-    return true;
-  }
 
   Future<bool> uploadSubtitle() async {
     user.loadUser();
