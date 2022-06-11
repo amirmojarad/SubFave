@@ -9,7 +9,7 @@ class Api {
   ));
 
   Future<Response> post(Map<String, dynamic> jsonBody, String urlPath) async {
-    user ??= await User.loadFromSharedPreferences();
+    await user.loadUser();
     return await dio.post(
       urlPath,
       data: jsonBody,

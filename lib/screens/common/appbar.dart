@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:subfave/models/user.dart';
 import 'package:subfave/screens/common/profile_menu.dart';
 
 class SubfaveAppBar extends StatelessWidget {
@@ -41,9 +42,16 @@ class SubfaveAppBar extends StatelessWidget {
                   onTap: () {
                     showProfileMenu(context, width);
                   },
-                  child: const Icon(
-                    Icons.person,
-                    size: 40,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: Image.network(
+                      user.imageUrl == ""
+                          ? "https://unsplash.com/photos/DCqAn1JtmQg/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjU0NDk2OTAz&force=true&w=1920"
+                          : user.imageUrl,
+                      width: 150,
+                      height: 150,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),

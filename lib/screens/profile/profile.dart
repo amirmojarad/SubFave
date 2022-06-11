@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:subfave/controllers/profile.dart';
-import 'package:subfave/controllers/upload.dart';
 import 'package:subfave/models/user.dart';
 import 'package:subfave/screens/common/appbar.dart';
 import 'package:subfave/screens/common/button.dart';
@@ -100,8 +99,8 @@ class ProfileScreen extends StatelessWidget {
                                                   Colors.transparent,
                                               borderRadius:
                                                   BorderRadius.circular(16),
-                                              onTap: () {
-                                                context
+                                              onTap: () async {
+                                                await context
                                                     .read<ProfileProvider>()
                                                     .uploadImage();
                                               },

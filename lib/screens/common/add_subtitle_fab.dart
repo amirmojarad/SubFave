@@ -55,6 +55,7 @@ class AddSubtitleFloatingActionButton extends StatelessWidget {
                                 onTap: () async {
                                   Upload upload = Upload();
                                   await upload.uploadSubtitle();
+                                  
                                 },
                                 child: Container(
                                   height: 100,
