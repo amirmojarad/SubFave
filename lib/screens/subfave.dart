@@ -6,6 +6,7 @@ import 'package:subfave/controllers/login.dart';
 import 'package:subfave/controllers/profile.dart';
 import 'package:subfave/controllers/search_movie.dart';
 import 'package:subfave/controllers/signup.dart';
+import 'package:subfave/controllers/words.dart';
 import 'package:subfave/screens/auth/login/login.dart';
 import 'package:subfave/screens/auth/signup/signup.dart';
 import 'package:subfave/screens/common/scroll.dart';
@@ -17,6 +18,7 @@ import 'package:subfave/screens/theme/dark/dark_theme.dart' as dark;
 import 'package:subfave/screens/theme/light/light_theme.dart' as light;
 import 'package:subfave/screens/theme/light/fonts.dart' as lightFonts;
 import 'package:subfave/screens/theme/dark/fonts.dart' as darkFonts;
+import 'package:subfave/screens/words/words.dart';
 
 class Subfave extends StatefulWidget {
   const Subfave({Key? key}) : super(key: key);
@@ -47,6 +49,7 @@ class _SubfaveState extends State<Subfave> {
         backgroundColor: light.backgroundColor,
         hintColor: light.hint,
         dividerColor: light.divider,
+        selectedRowColor: light.green,
         colorScheme: const ColorScheme.light(
           error: Color(0xffD12525),
           secondary: light.secondary,
@@ -110,6 +113,10 @@ class _SubfaveState extends State<Subfave> {
               ],
               child: SearchPage(),
             ),
+        '/words': (context) => ChangeNotifierProvider(
+              create: (context) => WordsProvider(),
+              child: WordsPage(),
+            )
       },
     );
   }

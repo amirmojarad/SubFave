@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:subfave/models/file.dart';
 import 'package:subfave/models/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
@@ -11,10 +12,12 @@ class Upload {
     return result!.files.first;
   }
 
-
-  Future<bool> uploadSubtitle() async {
+  Future<File> uploadSubtitle() async {
     user.loadUser();
+    File createdFile = File.withData(id: 0, name: "", path: "");
+
     final file = await _openFilePicker();
+
     var headers = {
       'Authorization': 'Bearer ${user.token}',
     };
@@ -29,9 +32,14 @@ class Upload {
       ),
     );
     request.headers.addAll(headers);
-    request.send().then((response) {
-      if (response.statusCode == 200) return true;
+    request.send().then((response) async {
+      if (response.statusCode == 200) {
+        String responseAsBytesString = await response.stream.bytesToString();
+        var jsonMap = jsonDecode(responseAsBytesString);
+        createdFile = File.FromJson(jsonMap["file"]);
+        return createdFile;
+      }
     });
-    return false;
+    return createdFile;
   }
 }
