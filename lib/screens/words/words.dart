@@ -4,14 +4,20 @@ import 'package:provider/provider.dart';
 import 'package:subfave/controllers/words.dart';
 import 'package:subfave/screens/common/appbar.dart';
 import 'package:subfave/screens/common/drawer.dart';
+import 'package:subfave/screens/words/next_page_button.dart';
 
-class WordsPage extends StatelessWidget {
+class WordsPage extends StatefulWidget {
   WordsPage({Key? key}) : super(key: key);
-  final GlobalKey<ScaffoldState> _key = GlobalKey();
+  @override
+  State<WordsPage> createState() => _WordsPageState();
+}
 
+class _WordsPageState extends State<WordsPage> {
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -62,227 +68,176 @@ class WordsPage extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: FutureBuilder(
-          future: context
-              .read<WordsProvider>()
-              .getWordsTitle(context.read<WordsProvider>().fileID),
+          future: context.read<WordsProvider>().getWordsTitle(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               var items = context.read<WordsProvider>().fetchedWordsTitle;
-              var selectedItems = context.read<WordsProvider>().selectedWords;
               return Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SubfaveAppBar(scaffoldKey: _key),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height - 150,
-                        child: GridView.count(
-                          mainAxisSpacing: 8,
-                          crossAxisSpacing: 8,
+                    const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                child: Column(
+                  children: [
+                    SubfaveAppBar(scaffoldKey: _key),
+                    //Search bar for words
+                    SizedBox(
+                      width: width - 50,
+                      height: height - 166,
+                      child: GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          mainAxisSpacing: 6,
+                          crossAxisSpacing: 12,
                           crossAxisCount: 8,
-                          children: items.map((word) {
-                            bool isSelected = context
-                                .watch<WordsProvider>()
-                                .isWordSelected(word);
-                            return Container(
-                              child: Material(
+                        ),
+                        itemCount: items.length,
+                        itemBuilder: (context, index) {
+                          var word = context
+                              .watch<WordsProvider>()
+                              .fetchedWordsTitle[index];
+                          bool isSelected = context
+                              .watch<WordsProvider>()
+                              .isWordSelected(word);
+                          return Container(
+                            child: Material(
+                              borderRadius: BorderRadius.circular(8),
+                              child: InkWell(
                                 borderRadius: BorderRadius.circular(8),
-                                child: InkWell(
-                                  borderRadius: BorderRadius.circular(8),
-                                  onTap: () {
-                                    if (context
+                                onTap: () {
+                                  if (context
+                                      .read<WordsProvider>()
+                                      .isWordSelected(word)) {
+                                    context
                                         .read<WordsProvider>()
-                                        .isWordSelected(word)) {
-                                      context
-                                          .read<WordsProvider>()
-                                          .removeWordFromSelectedWords(word);
-                                    } else {
-                                      context
-                                          .read<WordsProvider>()
-                                          .addWordToSelectedWords(word);
-                                    }
-                                  },
-                                  child: Center(
-                                    child: Flexible(
-                                      child: Text(
-                                        word.title,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineSmall!
-                                            .copyWith(fontSize: 14),
-                                      ),
-                                    ),
+                                        .removeWordFromSelectedWords(word);
+                                  } else {
+                                    context
+                                        .read<WordsProvider>()
+                                        .addWordToSelectedWords(word);
+                                  }
+                                },
+                                child: Center(
+                                  child: Text(
+                                    word.title,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineSmall!
+                                        .copyWith(fontSize: 14),
                                   ),
                                 ),
                               ),
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Theme.of(context).colorScheme.background,
+                              boxShadow: isSelected
+                                  ? [
+                                      BoxShadow(
+                                          offset: Offset(-3, 7),
+                                          color: Theme.of(context).dividerColor)
+                                    ]
+                                  : [],
+                              border: Border.all(
+                                color: isSelected
+                                    ? Theme.of(context).selectedRowColor
+                                    : Theme.of(context).colorScheme.primary,
+                                width: isSelected ? 4 : 3,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0, bottom: 0),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: Theme.of(context).colorScheme.background,
-                                boxShadow: isSelected
-                                    ? [
-                                        BoxShadow(
-                                            offset: Offset(-3, 7),
-                                            color:
-                                                Theme.of(context).dividerColor)
-                                      ]
-                                    : [],
-                                border: Border.all(
-                                  color: isSelected
-                                      ? Theme.of(context).selectedRowColor
-                                      : Theme.of(context).colorScheme.primary,
-                                  width: isSelected ? 4 : 3,
+                                borderRadius: const BorderRadius.only(
+                                    bottomLeft: Radius.circular(8),
+                                    topLeft: Radius.circular(8),
+                                  ),
+                                color:  Theme.of(context).colorScheme.primary,
+                              ),
+                              child: Material(
+                                borderRadius: const BorderRadius.only(
+                                    bottomLeft: Radius.circular(8),
+                                    topLeft: Radius.circular(8),
+                                  ),
+                                color: Colors.transparent,
+                                child: InkWell(
+                                  borderRadius: const BorderRadius.only(
+                                    bottomLeft: Radius.circular(8),
+                                    topLeft: Radius.circular(8),
+                                  ),
+                                  onTap: () async {
+                                    context
+                                        .read<WordsProvider>()
+                                        .pageNumberDecrement();
+                                    await context
+                                        .read<WordsProvider>()
+                                        .getWordsTitle();
+                                    setState(() {});
+                                  },
+                                  child: Icon(FeatherIcons.chevronLeft,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .background),
                                 ),
                               ),
-                            );
-                          }).toList(),
+                              width: 50,
+                              height: 50,
+                            ),
+                            const SizedBox(
+                              child: VerticalDivider(),
+                              height: 50,
+                              width: 0,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.only(
+                                  topRight: Radius.circular(8),
+                                  bottomRight: Radius.circular(8),
+                                ),
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                              child: Material(
+                                borderRadius: const BorderRadius.only(
+                                  topRight: Radius.circular(8),
+                                  bottomRight: Radius.circular(8),
+                                ),
+                                color: Colors.transparent,
+                                child: InkWell(
+                                  borderRadius: const BorderRadius.only(
+                                    topRight: Radius.circular(8),
+                                    bottomRight: Radius.circular(8),
+                                  ),
+                                  onTap: () async {
+                                    context
+                                        .read<WordsProvider>()
+                                        .pageNumberIncrement();
+                                    await context
+                                        .read<WordsProvider>()
+                                        .getWordsTitle();
+                                    setState(() {});
+                                  },
+                                  child: Icon(FeatherIcons.chevronRight,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .background),
+                                ),
+                              ),
+                              width: 50,
+                              height: 50,
+                            )
+                          ],
                         ),
-                      )
-                      // SizedBox(
-                      //     width: MediaQuery.of(context).size.width-100,
-                      //     height: MediaQuery.of(context).size.height - 150,
-                      //     child: GridView.count(
-                      //       shrinkWrap: true,
-                      //       crossAxisCount: 8,
-                      //       childAspectRatio: 1.0,
-                      //       padding: const EdgeInsets.all(8),
-                      //       mainAxisSpacing:4,
-                      //       crossAxisSpacing: 4,
-                      //       children: items.map((word){
-                      //         context.read<WordsProvider>().isWordSelected(word);
-                      //         return Stack(
-
-                      //           children: [
-                      //             Container(
-                      //               child: Material(
-                      //                 borderRadius: BorderRadius.circular(8),
-                      //                 child: InkWell(
-                      //                   borderRadius: BorderRadius.circular(8),
-                      //                   onTap: () {
-                      //                     context.read<WordsProvider>().addWordToSelectedWords(word);
-                      //                     setState(() {
-
-                      //                     });
-                      //                   },
-                      //                   child: Center(
-                      //                     child: Flexible(
-                      //                       child: Text(
-                      //                         word.title,
-                      //                         style: Theme.of(context)
-                      //                             .textTheme
-                      //                             .headlineSmall!
-                      //                             .copyWith(fontSize: 14),
-                      //                       ),
-                      //                     ),
-                      //                   ),
-                      //                 ),
-                      //               ),
-                      //               decoration: BoxDecoration(
-                      //                 borderRadius: BorderRadius.circular(8),
-                      //                 color: Theme.of(context)
-                      //                     .colorScheme
-                      //                     .background,
-                      //                 border: Border.all(
-                      //                   color:
-                      //                       Theme.of(context).colorScheme.primary,
-                      //                   width: 3,
-                      //                 ),
-                      //               ),
-                      //             ),
-                      //             context.read<WordsProvider>().isWordSelected(word)
-                      //                 ? Padding(
-                      //                     padding: const EdgeInsets.only(
-                      //                         top: 4.0, left: 4),
-                      //                     child: Icon(
-                      //                       FeatherIcons.checkCircle,
-                      //                       size: 28,
-                      //                       color: Theme.of(context)
-                      //                           .selectedRowColor,
-                      //                     ),
-                      //                   )
-                      //                 : Container(),
-                      //           ],
-                      //         );
-                      //       }).toList()
-                      //     )
-
-                      //     // child: GridView.builder(
-                      //     //   shrinkWrap: true,
-                      //     //   itemCount: items.length,
-                      //     //   // itemCount: context
-                      //     //   //     .read<WordsProvider>()
-                      //     //   //     .fetchedWordsTitle
-                      //     //   //     .length,
-                      //     //   gridDelegate:
-                      //     //       const SliverGridDelegateWithFixedCrossAxisCount(
-                      //     //     crossAxisCount: 8,
-                      //     //     crossAxisSpacing: 8,
-                      //     //     mainAxisSpacing: 8,
-                      //     //   ),
-                      //     //   itemBuilder: (BuildContext context, int index) {
-                      //     //     var word = items[index];
-                      //     //     // context.read<WordsProvider>().isWordSelected(word);
-                      //     //     return Stack(
-
-                      //     //       children: [
-                      //     //         Container(
-                      //     //           child: Material(
-                      //     //             borderRadius: BorderRadius.circular(8),
-                      //     //             child: InkWell(
-                      //     //               borderRadius: BorderRadius.circular(8),
-                      //     //               onTap: () {
-                      //     //                 provider.addWordToSelectedWords(word);
-                      //     //                 // context.read<WordsProvider>().addWordToSelectedWords(word);
-                      //     //                 setState(() {
-
-                      //     //                 });
-                      //     //               },
-                      //     //               child: Center(
-                      //     //                 child: Flexible(
-                      //     //                   child: Text(
-                      //     //                     items[index].title,
-                      //     //                     style: Theme.of(context)
-                      //     //                         .textTheme
-                      //     //                         .headlineSmall!
-                      //     //                         .copyWith(fontSize: 14),
-                      //     //                   ),
-                      //     //                 ),
-                      //     //               ),
-                      //     //             ),
-                      //     //           ),
-                      //     //           decoration: BoxDecoration(
-                      //     //             borderRadius: BorderRadius.circular(8),
-                      //     //             color: Theme.of(context)
-                      //     //                 .colorScheme
-                      //     //                 .background,
-                      //     //             border: Border.all(
-                      //     //               color:
-                      //     //                   Theme.of(context).colorScheme.primary,
-                      //     //               width: 3,
-                      //     //             ),
-                      //     //           ),
-                      //     //         ),
-                      //     //         provider.isWordSelected(word)
-                      //     //             ? Padding(
-                      //     //                 padding: const EdgeInsets.only(
-                      //     //                     top: 4.0, left: 4),
-                      //     //                 child: Icon(
-                      //     //                   FeatherIcons.checkCircle,
-                      //     //                   size: 28,
-                      //     //                   color: Theme.of(context)
-                      //     //                       .selectedRowColor,
-                      //     //                 ),
-                      //     //               )
-                      //     //             : Container(),
-                      //     //       ],
-                      //     //     );
-                      //     //   },
-                      //     // ),
-                      //     ),
-                    ],
-                  ),
+                      ),
+                    ),
+                  ],
                 ),
               );
             } else {
