@@ -13,10 +13,10 @@ class Upload {
   }
 
   Future<File> uploadSubtitle() async {
-    user.loadUser();
+    await user.loadUser();
     File createdFile = File.withData(id: 0, name: "", path: "");
 
-    final file = await _openFilePicker();
+    final openingFile = await _openFilePicker();
 
     var headers = {
       'Authorization': 'Bearer ${user.token}',
@@ -26,17 +26,18 @@ class Upload {
     request.files.add(
       http.MultipartFile.fromBytes(
         'file',
-        file.bytes!,
+        openingFile.bytes!,
         contentType: MediaType('application', 'octet-stream'),
         filename: file.name,
       ),
     );
     request.headers.addAll(headers);
-    request.send().then((response) async {
+    await request.send().then((response) async {
       if (response.statusCode == 200) {
         String responseAsBytesString = await response.stream.bytesToString();
         var jsonMap = jsonDecode(responseAsBytesString);
-        createdFile = File.FromJson(jsonMap["file"]);
+        file = File.fromJson(jsonMap["file"]);
+        await createdFile.save("subFile", createdFile.toJson());
         return createdFile;
       }
     });

@@ -13,8 +13,6 @@ class SearchPage extends StatelessWidget {
   final TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
     List<Movie> movies = context.read<SearchProvider>().movies;
 
     return Scaffold(

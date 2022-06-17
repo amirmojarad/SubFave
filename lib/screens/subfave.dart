@@ -114,7 +114,7 @@ class _SubfaveState extends State<Subfave> {
               child: SearchPage(),
             ),
         '/words': (context) => ChangeNotifierProvider(
-              create: (context) => WordsProvider(),
+              create: (context) => wordsProvider,
               child: WordsPage(),
             )
       },

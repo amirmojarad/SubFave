@@ -56,12 +56,11 @@ class AddSubtitleFloatingActionButton extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(16),
                                 onTap: () async {
                                   Upload upload = Upload();
-                                  File createdFile =
-                                      await upload.uploadSubtitle();
-                                  createdFile =
-                                      File.withData(id: 0, name: "", path: "");
-                                  wordsProvider.fileID = createdFile.id;
-                                  Navigator.pushNamed(context, '/words',);
+                                  file = await upload.uploadSubtitle();
+                                  Navigator.pushNamed(
+                                    context,
+                                    '/words',
+                                  );
                                 },
                                 child: Container(
                                   height: 100,

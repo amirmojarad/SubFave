@@ -1,12 +1,33 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:subfave/models/file.dart';
 import 'package:subfave/models/user.dart';
 import 'package:subfave/models/word.dart';
 import 'package:http/http.dart' as http;
 
 class WordsProvider with ChangeNotifier {
   List<Word> selectedWords = [];
+  List<Word> searchedWords = [];
+
+  Future<void> searchWords(String title) async {
+    file = await file.loadFile();
+    await user.loadUser();
+    searchedWords.clear();
+    var response = await http.get(
+        Uri.parse(
+            "http://localhost:8080/words/search?file_id=${file.id}&title=$title"),
+        headers: {
+          'Authorization': 'Bearer ${user.token}',
+        });
+    print(response.body);
+    if (response.statusCode == 200) {
+      List<dynamic> words = jsonDecode(response.body);
+      searchedWords
+          .addAll(words.map((wordMap) => Word.FromJson(wordMap)).toList());
+    }
+    notifyListeners();
+  }
 
   bool isWordSelected(Word word) => selectedWords.contains(word);
 
@@ -33,23 +54,23 @@ class WordsProvider with ChangeNotifier {
 
   int pageNumber = 1;
 
-
-  void pageNumberDecrement(){
+  void pageNumberDecrement() {
     pageNumber--;
   }
 
-  void pageNumberIncrement(){
+  void pageNumberIncrement() {
     pageNumber++;
   }
 
-  int fileID = 0;
   final List<Word> fetchedWordsTitle = [];
   Future<List<Word>> getWordsTitle() async {
     fetchedWordsTitle.clear();
+    file = await file.loadFile();
+    print(file.id);
     await user.loadUser();
     var response = await http.get(
         Uri.parse(
-            "http://localhost:8080/words?file_id=$fileID&page_number=$pageNumber"),
+            "http://localhost:8080/words?file_id=${file.id}&page_number=$pageNumber"),
         headers: {
           'Authorization': 'Bearer ${user.token}',
         });
