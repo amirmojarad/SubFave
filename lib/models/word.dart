@@ -1,15 +1,17 @@
 import 'package:equatable/equatable.dart';
+import 'package:subfave/models/user.dart';
 
 class Word extends Equatable{
   final String title, sentence, duration, start, end, meaning;
-  Word.withData(
+  const Word.withData(
       {required this.title,
       required this.duration,
       required this.end,
       required this.meaning,
       required this.sentence,
       required this.start});
-  factory Word.FromJson(Map<String, dynamic> json) {
+      
+  factory Word.fromJson(Map<String, dynamic> json) {
     return Word.withData(
       title: json["title"] ?? "",
       sentence: json["sentence"] ?? "",
@@ -29,6 +31,7 @@ class Word extends Equatable{
       "start": start,
     };
   }
+
 
   @override
   List<Object?> get props => [title];

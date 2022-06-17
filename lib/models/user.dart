@@ -1,23 +1,24 @@
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:subfave/models/subfave.dart';
+import 'package:subfave/models/handlers/file_handler.dart';
+import 'package:subfave/view/screens/config.dart';
 
-class User extends SubfaveSuperModel {
+class User extends FileHandler {
   final String username, token, email, fullName;
   String imageUrl;
   final int id;
-  User.withData({
-    required this.email,
-    required this.token,
-    required this.username,
-    required this.id,
-    required this.fullName,
-    required this.imageUrl,
+  User({
+     this.email = "",
+     this.token = "",
+     this.username = "",
+     this.id = 0,
+     this.fullName = "",
+     this.imageUrl = "",
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
-    return User.withData(
+    return User(
       fullName: json["user"]["full_name"] ?? "",
       email: json["user"]["email"],
       token: json["token"],
@@ -56,6 +57,3 @@ class User extends SubfaveSuperModel {
     return User.fromJson(jsonDecode(loadedData!) as Map<String, dynamic>);
   }
 }
-
-User user =
-    User.withData(email: "", token: "", username: "", id: -1, fullName: "", imageUrl: "");
