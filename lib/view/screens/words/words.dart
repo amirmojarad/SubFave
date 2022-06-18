@@ -31,133 +31,170 @@ class _WordsPageState extends State<WordsPage> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               var items = context.read<WordsProvider>().fetchedWordsTitle;
+              bool isFirstPage = context.watch<WordsProvider>().pageNumber == 1;
               return Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-                child: Column(
-                  children: [
-                    SubfaveAppBar(scaffoldKey: _key),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0, bottom: 8),
-                      child: Container(
-                        child: TextField(
-                            decoration: InputDecoration(
-                          prefixIcon: IconButton(
-                            hoverColor: Colors.transparent,
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            iconSize: 30,
-                            color: Theme.of(context).colorScheme.primary,
-                            icon: const Icon(Icons.search),
-                            onPressed: () async {
-                              await context
-                                  .read<WordsProvider>()
-                                  .searchWords(controller.text);
-                              setState(() {});
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SubfaveAppBar(scaffoldKey: _key),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0, bottom: 8),
+                        child: Container(
+                          child: TextField(
+                            onChanged: (value) async {
+                              if (value.isEmpty) {
+                                await context
+                                    .read<WordsProvider>()
+                                    .getWordsTitle();
+                              } else {
+                                await context
+                                    .read<WordsProvider>()
+                                    .searchWords(value);
+                              }
+                              // setState(() {});
                             },
-                          ),
-                        )),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.background,
-                        ),
-                        width: 300,
-                        height: 50,
-                      ),
-                    ),
-                    //Search bar for words
-                    WordsGridList(width: width, height: height, items: items),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0, bottom: 0),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.circular(8),
-                                  topLeft: Radius.circular(8),
-                                ),
-                                color: Theme.of(context).colorScheme.primary,
+                            decoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: BorderSide(
+                                    width: 2,
+                                    color:
+                                        Theme.of(context).colorScheme.primary),
                               ),
-                              child: Material(
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.circular(8),
-                                  topLeft: Radius.circular(8),
-                                ),
-                                color: Colors.transparent,
-                                child: InkWell(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    width: 1,
+                                    color:
+                                        Theme.of(context).colorScheme.primary),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              prefixIcon: IconButton(
+                                hoverColor: Colors.transparent,
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                iconSize: 30,
+                                color: Theme.of(context).colorScheme.primary,
+                                icon: const Icon(Icons.search),
+                                onPressed: () async {
+                                  await context
+                                      .read<WordsProvider>()
+                                      .searchWords(controller.text);
+                                  setState(() {});
+                                },
+                              ),
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.background,
+                          ),
+                          width: width / 1.8,
+                          height: 50,
+                        ),
+                      ),
+                      //Search bar for words
+                      WordsGridList(width: width, height: height, items: items),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0, bottom: 0),
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
                                   borderRadius: const BorderRadius.only(
                                     bottomLeft: Radius.circular(8),
                                     topLeft: Radius.circular(8),
                                   ),
-                                  onTap: () async {
-                                    context
-                                        .read<WordsProvider>()
-                                        .pageNumberDecrement();
-                                    await context
-                                        .read<WordsProvider>()
-                                        .getWordsTitle();
-                                    setState(() {});
-                                  },
-                                  child: Icon(FeatherIcons.chevronLeft,
-                                      color: Theme.of(context)
+                                  color: isFirstPage
+                                      ? Theme.of(context)
                                           .colorScheme
-                                          .background),
+                                          .primary
+                                          .withOpacity(0.2)
+                                      : Theme.of(context).colorScheme.primary,
                                 ),
+                                child: Material(
+                                  borderRadius: const BorderRadius.only(
+                                    bottomLeft: Radius.circular(8),
+                                    topLeft: Radius.circular(8),
+                                  ),
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.circular(8),
+                                      topLeft: Radius.circular(8),
+                                    ),
+                                    onTap: isFirstPage
+                                        ? () {}
+                                        : () async {
+                                            context
+                                                .read<WordsProvider>()
+                                                .pageNumberDecrement();
+                                            await context
+                                                .read<WordsProvider>()
+                                                .getWordsTitle();
+                                            setState(() {});
+                                          },
+                                    child: Icon(FeatherIcons.chevronLeft,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .background),
+                                  ),
+                                ),
+                                width: 50,
+                                height: 50,
                               ),
-                              width: 50,
-                              height: 50,
-                            ),
-                            const SizedBox(
-                              child: VerticalDivider(),
-                              height: 50,
-                              width: 0,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: const BorderRadius.only(
-                                  topRight: Radius.circular(8),
-                                  bottomRight: Radius.circular(8),
-                                ),
-                                color: Theme.of(context).colorScheme.primary,
+                              const SizedBox(
+                                child: VerticalDivider(),
+                                height: 50,
+                                width: 0,
                               ),
-                              child: Material(
-                                borderRadius: const BorderRadius.only(
-                                  topRight: Radius.circular(8),
-                                  bottomRight: Radius.circular(8),
-                                ),
-                                color: Colors.transparent,
-                                child: InkWell(
+                              Container(
+                                decoration: BoxDecoration(
                                   borderRadius: const BorderRadius.only(
                                     topRight: Radius.circular(8),
                                     bottomRight: Radius.circular(8),
                                   ),
-                                  onTap: () async {
-                                    context
-                                        .read<WordsProvider>()
-                                        .pageNumberIncrement();
-                                    await context
-                                        .read<WordsProvider>()
-                                        .getWordsTitle();
-                                    setState(() {});
-                                  },
-                                  child: Icon(FeatherIcons.chevronRight,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .background),
+                                  color: Theme.of(context).colorScheme.primary,
                                 ),
-                              ),
-                              width: 50,
-                              height: 50,
-                            )
-                          ],
+                                child: Material(
+                                  borderRadius: const BorderRadius.only(
+                                    topRight: Radius.circular(8),
+                                    bottomRight: Radius.circular(8),
+                                  ),
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    borderRadius: const BorderRadius.only(
+                                      topRight: Radius.circular(8),
+                                      bottomRight: Radius.circular(8),
+                                    ),
+                                    onTap: () async {
+                                      context
+                                          .read<WordsProvider>()
+                                          .pageNumberIncrement();
+                                      await context
+                                          .read<WordsProvider>()
+                                          .getWordsTitle();
+                                      setState(() {});
+                                    },
+                                    child: Icon(FeatherIcons.chevronRight,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .background),
+                                  ),
+                                ),
+                                width: 50,
+                                height: 50,
+                              )
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             } else {

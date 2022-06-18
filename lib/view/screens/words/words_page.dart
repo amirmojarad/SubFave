@@ -17,15 +17,16 @@ class WordsGridList extends StatelessWidget {
   final List<Word> items;
   @override
   Widget build(BuildContext context) {
+    print(items.length);
     return SizedBox(
       width: width - 50,
-      height: height - 300,
+      height: height - 150,
       child: GridView.builder(
         gridDelegate:
             const SliverGridDelegateWithFixedCrossAxisCount(
           mainAxisSpacing: 6,
           crossAxisSpacing: 12,
-          crossAxisCount: 12,
+          crossAxisCount: 9,
         ),
         itemCount: items.length,
         itemBuilder: (context, index) {

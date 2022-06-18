@@ -9,22 +9,20 @@ import 'package:subfave/view/screens/config.dart';
 
 class WordsProvider with ChangeNotifier {
   List<Word> selectedWords = [];
-  List<Word> searchedWords = [];
 
   Future<void> searchWords(String title) async {
     file = await file.loadFile();
     await user.loadUser();
-    searchedWords.clear();
+    fetchedWordsTitle.clear();
     var response = await http.get(
         Uri.parse(
             "http://localhost:8080/words/search?file_id=${file.id}&title=$title"),
         headers: {
           'Authorization': 'Bearer ${user.token}',
         });
-    print(response.body);
     if (response.statusCode == 200) {
       List<dynamic> words = jsonDecode(response.body);
-      searchedWords
+      fetchedWordsTitle
           .addAll(words.map((wordMap) => Word.fromJson(wordMap)).toList());
     }
     notifyListeners();
@@ -75,7 +73,6 @@ class WordsProvider with ChangeNotifier {
           'Authorization': 'Bearer ${user.token}',
         });
     Map<String, dynamic> jsonResponse = jsonDecode(response.body);
-    print(jsonResponse);
     for (var item in jsonResponse["records"]) {
       fetchedWordsTitle.add(Word.fromJson(item));
     }

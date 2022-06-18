@@ -9,7 +9,10 @@ class File with FileHandler {
   File({this.name = "", this.id = 0, this.path = ""});
 
   factory File.fromJson(Map<String, dynamic> json) {
-    return File(id: json["id"], name: json["name"], path: json["path"]);
+    return File(
+        id: json["id"] ?? 0,
+        name: json["name"] ?? "",
+        path: json["path"] ?? "");
   }
 
   Map<String, dynamic> toJson() {

@@ -9,21 +9,21 @@ class User extends FileHandler {
   String imageUrl;
   final int id;
   User({
-     this.email = "",
-     this.token = "",
-     this.username = "",
-     this.id = 0,
-     this.fullName = "",
-     this.imageUrl = "",
+    this.email = "",
+    this.token = "",
+    this.username = "",
+    this.id = 0,
+    this.fullName = "",
+    this.imageUrl = "",
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       fullName: json["user"]["full_name"] ?? "",
-      email: json["user"]["email"],
-      token: json["token"],
-      username: json["user"]["username"],
-      id: json["user"]["id"],
+      email: json["user"]["email"] ?? "",
+      token: json["token"] ?? "",
+      username: json["user"]["username"] ?? "",
+      id: json["user"]["id"] ?? "",
       imageUrl: json["user"]["image_url"] ?? "",
     );
   }
