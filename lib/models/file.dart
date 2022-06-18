@@ -5,14 +5,27 @@ import 'package:subfave/models/handlers/file_handler.dart';
 class File with FileHandler {
   final int id;
   final String path, name;
+  final DateTime? createdDate;
+  final List<dynamic> words;
 
-  File({this.name = "", this.id = 0, this.path = ""});
+  File(this.name, this.id, this.path, this.createdDate, this.words);
+
+  static String _makeFileNameValid(String fileName) {
+    String fName = fileName.split("/")[2];
+    fName = fName.replaceAll(".srt", "");
+    return fName;
+  }
 
   factory File.fromJson(Map<String, dynamic> json) {
     return File(
-        id: json["id"] ?? 0,
-        name: json["name"] ?? "",
-        path: json["path"] ?? "");
+      _makeFileNameValid(json["name"]),
+      json["id"] ?? 0,
+      json["path"] ?? "",
+      DateTime.tryParse(
+        json["created_date"],
+      ),
+      json["edges"]["words"] ?? []
+    );
   }
 
   Map<String, dynamic> toJson() {

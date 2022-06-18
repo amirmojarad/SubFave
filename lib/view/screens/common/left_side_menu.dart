@@ -39,15 +39,25 @@ class LeftSideMenu extends StatelessWidget {
             ),
             SizedBox(height: heightBetweenItems),
             LeftSideBarButton(
-              onTap: () {},
+              onTap: () {
+                                context.read<LeftSideMenuProvider>().chageSelectedValue(2);
+                Navigator.pushNamed(context, '/files');
+              },
               isSelected: 2 == context.read<LeftSideMenuProvider>().isSelected,
+              icon: FeatherIcons.file,
+              title: "Subtitles",
+            ),
+            SizedBox(height: heightBetweenItems),
+            LeftSideBarButton(
+              onTap: () {},
+              isSelected: 3 == context.read<LeftSideMenuProvider>().isSelected,
               icon: FeatherIcons.grid,
               title: "Collections",
             ),
             SizedBox(height: heightBetweenItems),
             LeftSideBarButton(
               onTap: () {},
-              isSelected: 3 == context.read<LeftSideMenuProvider>().isSelected,
+              isSelected: 4 == context.read<LeftSideMenuProvider>().isSelected,
               icon: FeatherIcons.film,
               title: "My Movies",
             ),

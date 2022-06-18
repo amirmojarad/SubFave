@@ -31,13 +31,108 @@ class _WordsPageState extends State<WordsPage> {
                   onTap: () {
                     context.read<WordsProvider>().addToFavorites();
                   },
-                  child: Text("Add To Favorites",
-                      style: Theme.of(context).textTheme.headlineSmall),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("Add To Favorites",
+                        style: Theme.of(context).textTheme.headlineSmall),
+                  ),
                 ),
               ),
               PopupMenuItem(
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (value) {
+                          return Container(
+                            color: Colors.transparent,
+                            height: 400,
+                            width: width,
+                            child: Container(
+                              child: SingleChildScrollView(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 32.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 8, horizontal: 0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              width: width / 2.5,
+                                              height: 50,
+                                              child: TextField(
+                                                
+                                                decoration: InputDecoration(
+                                                  hintText: "e.g Attack on Titan",
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                      16,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 16.0),
+                                              child: Container(
+                                                width: 100,
+                                                height: 50,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primary,
+                                                ),
+                                                child: Center(
+                                                  child: Text(
+                                                    "Create",
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .headlineSmall!
+                                                        .copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w200,
+                                                          fontSize: 16,
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .colorScheme
+                                                                  .background,
+                                                        ),
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      RecentCategories(width: width),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.background,
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(16),
+                                  topRight: Radius.circular(16),
+                                ),
+                              ),
+                            ),
+                          );
+                        });
+                  },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text("Add To Category",
@@ -243,6 +338,93 @@ class _WordsPageState extends State<WordsPage> {
                   child: Center(child: CircularProgressIndicator()));
             }
           },
+        ),
+      ),
+    );
+  }
+}
+
+class RecentCategories extends StatelessWidget {
+  const RecentCategories({
+    Key? key,
+    required this.width,
+  }) : super(key: key);
+
+  final double width;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 32.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            "Recent Categories",
+            style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 22,
+                ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+            child: SizedBox(
+              width: width,
+              child: Divider(),
+            ),
+          ),
+          SizedBox(
+            width: width,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: const [
+                  CategoryCardItem(),
+                  CategoryCardItem(),
+                  CategoryCardItem(),
+                  CategoryCardItem(),
+                  CategoryCardItem(),
+                  CategoryCardItem(),
+                  CategoryCardItem(),
+                  CategoryCardItem(),
+                  CategoryCardItem(),
+                  CategoryCardItem(),
+                  CategoryCardItem(),
+                  CategoryCardItem(),
+                  CategoryCardItem(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CategoryCardItem extends StatelessWidget {
+  const CategoryCardItem({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0),
+      child: Container(
+        width: 200,
+        height: 50,
+        child: Center(
+            child: Text(
+          "Category first",
+          style: Theme.of(context).textTheme.headlineSmall,
+        )),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.background,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+              color: Theme.of(context).colorScheme.primary, width: 0.8),
         ),
       ),
     );

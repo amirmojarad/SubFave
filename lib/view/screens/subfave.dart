@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:subfave/view/providers/files.dart';
 import 'package:subfave/view/providers/home.dart';
 import 'package:subfave/view/providers/left_side_menu.dart';
 import 'package:subfave/view/providers/login.dart';
@@ -9,6 +10,7 @@ import 'package:subfave/view/providers/signup.dart';
 import 'package:subfave/view/screens/auth/login/login.dart';
 import 'package:subfave/view/screens/auth/signup/signup.dart';
 import 'package:subfave/view/screens/common/scroll.dart';
+import 'package:subfave/view/screens/files/files.dart';
 import 'package:subfave/view/screens/home/home.dart';
 import 'package:subfave/view/screens/profile/profile.dart';
 import 'package:subfave/view/screens/search/search.dart';
@@ -116,7 +118,17 @@ class _SubfaveState extends State<Subfave> {
         '/words': (context) => ChangeNotifierProvider(
               create: (context) => wordsProvider,
               child: WordsPage(),
-            )
+            ),
+        '/files': (context) => MultiProvider(
+              providers: [
+                ChangeNotifierProvider(
+                  create: (context) => FilesProvider(),
+                ),
+                ChangeNotifierProvider(
+                    create: (context) => leftSideMenuProvider),
+              ],
+              child: FilesScreen(),
+            ),
       },
     );
   }
