@@ -55,12 +55,6 @@ class LeftSideMenu extends StatelessWidget {
               title: "Collections",
             ),
             SizedBox(height: heightBetweenItems),
-            LeftSideBarButton(
-              onTap: () {},
-              isSelected: 4 == context.read<LeftSideMenuProvider>().isSelected,
-              icon: FeatherIcons.film,
-              title: "My Movies",
-            ),
           ],
         ),
         SizedBox(

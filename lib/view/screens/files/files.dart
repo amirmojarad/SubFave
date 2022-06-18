@@ -16,6 +16,7 @@ class FilesScreen extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       key: _key,
       drawer: const SubfaveDrawer(),
       body: SafeArea(

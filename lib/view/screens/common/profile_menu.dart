@@ -39,6 +39,19 @@ showProfileMenu(BuildContext context, double width) {
       PopupMenuItem(
           child: GestureDetector(
         onTap: () {
+          Navigator.pushNamed(context, '/home');
+        },
+        child: Text(
+          "Home",
+          style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                fontWeight: FontWeight.w500,
+              ),
+        ),
+      )),
+
+      PopupMenuItem(
+          child: GestureDetector(
+        onTap: () {
           Navigator.pushNamed(context, '/login');
         },
         child: Text(

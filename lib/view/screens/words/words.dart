@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:subfave/view/providers/words.dart';
 import 'package:subfave/view/screens/common/appbar.dart';
 import 'package:subfave/view/screens/common/drawer.dart';
-import 'package:subfave/view/screens/words/words_page.dart';
+import 'package:subfave/view/screens/common/words_page.dart';
 
 class WordsPage extends StatefulWidget {
   WordsPage({Key? key}) : super(key: key);

@@ -1,10 +1,12 @@
-
 import 'package:flutter/material.dart';
 
 class SubfaveSectionHeader extends StatelessWidget {
-  const SubfaveSectionHeader(
-      {Key? key, required this.width, required this.list, required this.title})
-      : super(key: key);
+  const SubfaveSectionHeader({
+    Key? key,
+    required this.width,
+    required this.list,
+    required this.title,
+  }) : super(key: key);
   final String title;
   final List<Widget> list;
   final double width;

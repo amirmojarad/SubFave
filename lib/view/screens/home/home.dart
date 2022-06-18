@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:subfave/view/providers/home.dart';
 import 'package:subfave/view/screens/common/add_subtitle_fab.dart';
 import 'package:subfave/view/screens/common/appbar.dart';
 import 'package:subfave/view/screens/common/drawer.dart';
@@ -24,6 +26,8 @@ class HomePage extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 32),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SubfaveAppBar(
                   scaffoldKey: _key,
@@ -33,74 +37,52 @@ class HomePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     LeftSideMenu(),
+                    Spacer(),
                     Padding(
                       padding:
                           const EdgeInsets.only(left: 16, top: 16, right: 16),
-                      child: Column(
-                        children: [
-                          SubfaveSectionHeader(
-                            width: width,
-                            title: "Categories",
-                            list: const [
-                              FavoriteCategoryCard(
-                                title: "First",
-                              ),
-                              FavoriteCategoryCard(
-                                title: "Second",
-                              ),
-                              FavoriteCategoryCard(
-                                title: "Third",
-                              ),
-                              FavoriteCategoryCard(
-                                title: "4th",
-                              ),
-                              FavoriteCategoryCard(
-                                title: "5th",
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 32),
-                          SubfaveSectionHeader(
-                            width: width,
-                            title: "Favorite Words",
-                            list: const [
-                              FavoriteCategoryCard(
-                                title: "First",
-                              ),
-                              FavoriteCategoryCard(
-                                title: "Second",
-                              ),
-                              FavoriteCategoryCard(
-                                title: "Third",
-                              ),
-                              FavoriteCategoryCard(
-                                title: "4th",
-                              ),
-                              FavoriteCategoryCard(
-                                title: "5th",
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 32),
-                          SubfaveSectionHeader(
-                            width: width,
-                            title: "Favorite Movies",
-                            list: const [
-                              MovieCardItem(
-                                movieTitle: "Batman",
-                                imageURL:
-                                    'https://unsplash.com/photos/meqVd5zwylI/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8M3x8YmF0bWFufGVufDB8fHx8MTY1MzU3MTExNg&force=true&w=1920',
-                              ),
-                              MovieCardItem(
-                                movieTitle: "Batman",
-                                imageURL:
-                                    'https://unsplash.com/photos/meqVd5zwylI/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8M3x8YmF0bWFufGVufDB8fHx8MTY1MzU3MTExNg&force=true&w=1920',
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    )
+                      child: FutureBuilder(
+                          future: context.read<HomeProvider>().getWordsTitle(),
+                          builder: (context, snapshot) {
+                            var faveWords = context
+                                .watch<HomeProvider>()
+                                .faveWords
+                                .take(10)
+                                .toList();
+                            if (snapshot.hasData) {
+                              return Column(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.pushNamed(
+                                          context, '/favorite_words');
+                                    },
+                                    child: SubfaveSectionHeader(
+                                      width: width,
+                                      title: "Favorite Words",
+                                      list: List.generate(
+                                        faveWords.length,
+                                        (index) => FavoriteCategoryCard(
+                                          title: faveWords[index].title,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 32),
+                                  SubfaveSectionHeader(
+                                    width: width,
+                                    title: "Collections",
+                                    list: const [],
+                                  ),
+                                ],
+                              );
+                            } else {
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            }
+                          }),
+                    ),
+                    Spacer(),
                   ],
                 ),
               ],
