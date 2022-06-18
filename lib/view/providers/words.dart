@@ -84,7 +84,7 @@ class WordsProvider with ChangeNotifier {
   final List<Word> fetchedWordsTitle = [];
   Future<List<Word>> getWordsTitle() async {
     fetchedWordsTitle.clear();
-    file = await file.loadFile();
+    // file = await file.loadFile();
     await user.loadUser();
     var response = await http.get(
         Uri.parse(
