@@ -10,6 +10,26 @@ import 'package:subfave/view/screens/config.dart';
 class WordsProvider with ChangeNotifier {
   List<Word> selectedWords = [];
 
+  List<String> selectedWordsToStringList() =>
+      selectedWords.map((e) => e.title).toList();
+
+  Future<void> addToFavorites() async {
+    List<String> titles = selectedWordsToStringList();
+    String jsonBody = jsonEncode(titles);
+    var response = await http.post(
+      Uri.parse("http://localhost:8080/users/favorite_words"),
+      headers: {
+        'Authorization': 'Bearer ${user.token}',
+      },
+      body: jsonBody,
+    );
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      selectedWords.clear();
+    }
+    notifyListeners();
+  }
+
   Future<void> searchWords(String title) async {
     file = await file.loadFile();
     await user.loadUser();
