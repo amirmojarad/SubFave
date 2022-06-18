@@ -47,7 +47,6 @@ class _SubfaveState extends State<Subfave> {
       scrollBehavior: MyCustomScrollBehavior(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-      
         bottomSheetTheme: const BottomSheetThemeData(
           backgroundColor: Colors.transparent,
         ),
@@ -132,8 +131,13 @@ class _SubfaveState extends State<Subfave> {
               ],
               child: FilesScreen(),
             ),
-        '/favorite_words': (context) => ChangeNotifierProvider(
-              create: (context) => FavoriteWordsProvider(),
+        '/favorite_words': (context) => MultiProvider(
+              providers: [
+                ChangeNotifierProvider(
+                  create: (context) => FavoriteWordsProvider(),
+                ),
+                ChangeNotifierProvider(create: (context) => wordsProvider),
+              ],
               child: FavoriteWordsScreen(),
             ),
       },

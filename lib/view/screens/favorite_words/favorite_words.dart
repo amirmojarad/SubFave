@@ -16,28 +16,34 @@ class FavoriteWordsScreen extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       drawer: const SubfaveDrawer(),
       body: SafeArea(
-        child: Column(
-          children: [
-            SubfaveAppBar(scaffoldKey: _key),
-            FutureBuilder(
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  var items = context.watch<FavoriteWordsProvider>().faveWords;
-                  return WordsGridList(
-                    width: width,
-                    height: height,
-                    items: items,
-                  );
-                } else {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              },
-            )
-          ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 32.0, horizontal: 64),
+          child: Column(
+            children: [
+              SubfaveAppBar(scaffoldKey: _key),
+              FutureBuilder(
+                future: context.read<FavoriteWordsProvider>().getWordsTitle(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    print(snapshot.data);
+                    var items = snapshot.data as List<Word>;
+                    return WordsGridList(
+                      width: width,
+                      height: height,
+                      items: items,
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+              )
+            ],
+          ),
         ),
       ),
     );

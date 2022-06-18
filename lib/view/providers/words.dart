@@ -31,7 +31,7 @@ class WordsProvider with ChangeNotifier {
   }
 
   Future<void> searchWords(String title) async {
-    file = await file.loadFile();
+    // file = await file.loadFile();
     await user.loadUser();
     fetchedWordsTitle.clear();
     var response = await http.get(
@@ -40,6 +40,7 @@ class WordsProvider with ChangeNotifier {
         headers: {
           'Authorization': 'Bearer ${user.token}',
         });
+        print(response.body);
     if (response.statusCode == 200) {
       List<dynamic> words = jsonDecode(response.body);
       fetchedWordsTitle

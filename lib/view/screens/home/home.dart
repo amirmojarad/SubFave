@@ -6,7 +6,6 @@ import 'package:subfave/view/screens/common/appbar.dart';
 import 'package:subfave/view/screens/common/drawer.dart';
 import 'package:subfave/view/screens/common/left_side_menu.dart';
 import 'package:subfave/view/screens/home/favorite_category_card.dart';
-import 'package:subfave/view/screens/home/movie_item_card.dart';
 import 'package:subfave/view/screens/home/section.dart';
 
 class HomePage extends StatelessWidget {
