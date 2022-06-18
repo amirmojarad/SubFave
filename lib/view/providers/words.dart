@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:subfave/models/file.dart';
-import 'package:subfave/models/user.dart';
 import 'package:subfave/models/word.dart';
 import 'package:http/http.dart' as http;
 import 'package:subfave/view/screens/config.dart';
@@ -24,7 +22,7 @@ class WordsProvider with ChangeNotifier {
       body: jsonBody,
     );
     print(response.statusCode);
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 409) {
       selectedWords.clear();
     }
     notifyListeners();
