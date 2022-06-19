@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:subfave/view/providers/collection.dart';
 import 'package:subfave/view/providers/favorite_words.dart';
 import 'package:subfave/view/providers/files.dart';
 import 'package:subfave/view/providers/home.dart';
@@ -10,6 +11,7 @@ import 'package:subfave/view/providers/search_movie.dart';
 import 'package:subfave/view/providers/signup.dart';
 import 'package:subfave/view/screens/auth/login/login.dart';
 import 'package:subfave/view/screens/auth/signup/signup.dart';
+import 'package:subfave/view/screens/collections/collection.dart';
 import 'package:subfave/view/screens/common/scroll.dart';
 import 'package:subfave/view/screens/favorite_words/favorite_words.dart';
 import 'package:subfave/view/screens/files/files.dart';
@@ -139,6 +141,16 @@ class _SubfaveState extends State<Subfave> {
                 ChangeNotifierProvider(create: (context) => wordsProvider),
               ],
               child: FavoriteWordsScreen(),
+            ),
+        '/collection': (context) => MultiProvider(
+              providers: [
+                ChangeNotifierProvider(
+                  create: (context) => CollectionProvider(),
+                ),
+                ChangeNotifierProvider(
+                    create: (context) => leftSideMenuProvider),
+              ],
+              child: CollectionScreen(),
             ),
       },
     );

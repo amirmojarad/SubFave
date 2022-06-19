@@ -40,7 +40,7 @@ class LeftSideMenu extends StatelessWidget {
             SizedBox(height: heightBetweenItems),
             LeftSideBarButton(
               onTap: () {
-                                context.read<LeftSideMenuProvider>().chageSelectedValue(2);
+                context.read<LeftSideMenuProvider>().chageSelectedValue(2);
                 Navigator.pushNamed(context, '/files');
               },
               isSelected: 2 == context.read<LeftSideMenuProvider>().isSelected,
@@ -49,7 +49,11 @@ class LeftSideMenu extends StatelessWidget {
             ),
             SizedBox(height: heightBetweenItems),
             LeftSideBarButton(
-              onTap: () {},
+              onTap: () {
+                context.read<LeftSideMenuProvider>().chageSelectedValue(3);
+
+                Navigator.pushNamed(context, '/collection');
+              },
               isSelected: 3 == context.read<LeftSideMenuProvider>().isSelected,
               icon: FeatherIcons.grid,
               title: "Collections",

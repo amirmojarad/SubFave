@@ -41,13 +41,17 @@ class HomePage extends StatelessWidget {
                       padding:
                           const EdgeInsets.only(left: 16, top: 16, right: 16),
                       child: FutureBuilder(
-                          future: context.read<HomeProvider>().getWordsTitle(),
+                          future: context.read<HomeProvider>().getCollectionsAndFaveWords(),
                           builder: (context, snapshot) {
+                            print("asdsdd"+snapshot.data.toString());
                             var faveWords = context
                                 .watch<HomeProvider>()
                                 .faveWords
                                 .take(10)
                                 .toList();
+                                var collections = context.watch<HomeProvider>().collections.take(10).toList();
+                            print("ASDASD " + faveWords.toString());
+                            print("ASDASD " + collections.toString());
                             if (snapshot.hasData) {
                               return Column(
                                 children: [
@@ -71,7 +75,12 @@ class HomePage extends StatelessWidget {
                                   SubfaveSectionHeader(
                                     width: width,
                                     title: "Collections",
-                                    list: const [],
+                                    list: List.generate(
+                                        collections.length,
+                                        (index) => FavoriteCategoryCard(
+                                          title: collections[index].title,
+                                        ),
+                                      ),
                                   ),
                                 ],
                               );

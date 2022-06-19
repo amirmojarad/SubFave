@@ -70,9 +70,10 @@ class _WordsPageState extends State<WordsPage> {
                                               width: width / 2.5,
                                               height: 50,
                                               child: TextField(
-                                                
+                                                controller: controller,
                                                 decoration: InputDecoration(
-                                                  hintText: "e.g Attack on Titan",
+                                                  hintText:
+                                                      "e.g Attack on Titan",
                                                   border: OutlineInputBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -96,20 +97,41 @@ class _WordsPageState extends State<WordsPage> {
                                                       .primary,
                                                 ),
                                                 child: Center(
-                                                  child: Text(
-                                                    "Create",
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .headlineSmall!
-                                                        .copyWith(
-                                                          fontWeight:
-                                                              FontWeight.w200,
-                                                          fontSize: 16,
-                                                          color:
-                                                              Theme.of(context)
+                                                  child: Material(
+                                                    color: Colors.transparent,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12),
+                                                    child: InkWell(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12),
+                                                      onTap: () async {
+                                                        await context
+                                                            .read<
+                                                                WordsProvider>()
+                                                            .addWordsToCategory(
+                                                                controller
+                                                                    .text);
+                                                                    controller.clear();
+                                                      },
+                                                      child: Text(
+                                                        "Create",
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .headlineSmall!
+                                                            .copyWith(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w200,
+                                                              fontSize: 16,
+                                                              color: Theme.of(
+                                                                      context)
                                                                   .colorScheme
                                                                   .background,
-                                                        ),
+                                                            ),
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
                                               ),

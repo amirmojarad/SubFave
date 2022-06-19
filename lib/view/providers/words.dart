@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:subfave/models/collection.dart';
 import 'package:subfave/models/word.dart';
 import 'package:http/http.dart' as http;
 import 'package:subfave/view/screens/config.dart';
@@ -38,7 +39,7 @@ class WordsProvider with ChangeNotifier {
         headers: {
           'Authorization': 'Bearer ${user.token}',
         });
-        print(response.body);
+    print(response.body);
     if (response.statusCode == 200) {
       List<dynamic> words = jsonDecode(response.body);
       fetchedWordsTitle
@@ -97,5 +98,43 @@ class WordsProvider with ChangeNotifier {
     }
     notifyListeners();
     return fetchedWordsTitle;
+  }
+
+  List<Collection> collections = [];
+  Future<List<Collection>> getCollections() async {
+    await user.loadUser();
+    var response = await http.get(
+        Uri.parse("http://localhost:8080/users/collections/all"),
+        headers: {
+          'Authorization': 'Bearer ${user.token}',
+        });
+    if (response.statusCode == 200) {
+      var jsonResponse = jsonDecode(response.body);
+      print(jsonResponse);
+    }
+    return collections;
+  }
+
+  Future<void> addWordsToCategory(String title) async {
+    print(title);
+    await user.loadUser();
+    var jsonBody = jsonEncode({
+      "title": title,
+      "word_titles": selectedWords.map((e) => e.title).toList(),
+    });
+    var response = await http.post(
+        Uri.parse(
+          "http://localhost:8080/users/collections?file_id=${file.id}",
+        ),
+        body: jsonBody,
+        headers: {
+          'Authorization': 'Bearer ${user.token}',
+        });
+    print(response.body);
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      var jsonResponse = jsonDecode(response.body);
+      print(jsonResponse);
+    }
   }
 }
