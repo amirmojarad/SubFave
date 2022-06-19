@@ -12,6 +12,7 @@ import 'package:subfave/view/providers/signup.dart';
 import 'package:subfave/view/screens/auth/login/login.dart';
 import 'package:subfave/view/screens/auth/signup/signup.dart';
 import 'package:subfave/view/screens/collections/collection.dart';
+import 'package:subfave/view/screens/collections/collection_words.dart';
 import 'package:subfave/view/screens/common/scroll.dart';
 import 'package:subfave/view/screens/favorite_words/favorite_words.dart';
 import 'package:subfave/view/screens/files/files.dart';
