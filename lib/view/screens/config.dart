@@ -2,8 +2,8 @@ library config.globals;
 
 import 'package:subfave/models/file.dart';
 import 'package:subfave/models/user.dart';
-import 'package:subfave/view/providers/theme.dart';
-import 'package:subfave/view/providers/words.dart';
+import 'package:subfave/controllers/theme.dart';
+import 'package:subfave/controllers/words.dart';
 
 ThemeProvider currentTheme = ThemeProvider();
 var box;

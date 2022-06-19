@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
-import 'package:subfave/view/providers/upload.dart';
+import 'package:subfave/controllers/upload.dart';
 import 'package:subfave/view/screens/config.dart';
 
 class AddSubtitleFloatingActionButton extends StatelessWidget {

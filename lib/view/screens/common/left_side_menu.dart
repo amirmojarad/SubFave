@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:provider/provider.dart';
-import 'package:subfave/view/providers/left_side_menu.dart';
+import 'package:subfave/controllers/left_side_menu.dart';
 import 'package:subfave/view/screens/common/left_side_bar_button.dart';
 
 class LeftSideMenu extends StatelessWidget {

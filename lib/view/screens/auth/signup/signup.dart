@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:subfave/view/providers/signup.dart';
+import 'package:subfave/controllers/signup.dart';
 import 'package:subfave/view/screens/common/button.dart';
 import 'package:subfave/view/screens/common/email_form.dart';
 import 'package:subfave/view/screens/common/textfield.dart';

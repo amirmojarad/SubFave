@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:subfave/models/word.dart';
-import 'package:subfave/view/providers/words.dart';
+import 'package:subfave/controllers/words.dart';
 
 class WordsGridList extends StatelessWidget {
   const WordsGridList({

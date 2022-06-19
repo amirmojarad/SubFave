@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:subfave/models/user.dart';
-import 'package:subfave/view/providers/subfave.dart';
+import 'package:subfave/controllers/subfave.dart';
 
 class SignupProvider extends SubfaveMainProvider {
   bool checkConfirmPassword(String password, String confirmPassword) {

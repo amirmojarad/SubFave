@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:subfave/view/providers/login.dart';
+import 'package:subfave/controllers/login.dart';
 
 class RememberMe extends StatelessWidget {
   const RememberMe({

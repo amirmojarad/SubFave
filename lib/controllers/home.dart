@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:subfave/models/collection.dart';
 import 'package:subfave/models/word.dart';
-import 'package:subfave/view/providers/favorite_words.dart';
+import 'package:subfave/controllers/favorite_words.dart';
 import 'package:subfave/view/screens/config.dart';
 import 'package:http/http.dart' as http;
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:subfave/view/providers/home.dart';
+import 'package:subfave/controllers/home.dart';
 import 'package:subfave/view/screens/common/add_subtitle_fab.dart';
 import 'package:subfave/view/screens/common/appbar.dart';
 import 'package:subfave/view/screens/common/drawer.dart';

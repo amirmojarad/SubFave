@@ -1,9 +1,7 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:subfave/models/user.dart';
-import 'package:subfave/view/providers/subfave.dart';
+import 'package:subfave/controllers/subfave.dart';
 import 'package:subfave/view/screens/config.dart';
 
 class LoginProvider extends SubfaveMainProvider {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:subfave/models/collection.dart';
-import 'package:subfave/view/providers/collection.dart';
+import 'package:subfave/controllers/collection.dart';
 import 'package:subfave/view/screens/collections/collection_words.dart';
 import 'package:subfave/view/screens/common/appbar.dart';
 import 'package:subfave/view/screens/common/left_side_menu.dart';

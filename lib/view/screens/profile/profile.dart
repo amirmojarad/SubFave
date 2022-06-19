@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:subfave/models/user.dart';
-import 'package:subfave/view/providers/profile.dart';
+import 'package:subfave/controllers/profile.dart';
 import 'package:subfave/view/screens/common/appbar.dart';
 import 'package:subfave/view/screens/common/button.dart';
 import 'package:subfave/view/screens/common/drawer.dart';

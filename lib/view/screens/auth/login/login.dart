@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:subfave/view/providers/login.dart';
+import 'package:subfave/controllers/login.dart';
 import 'package:subfave/view/screens/auth/login/remember_me.dart';
 import 'package:subfave/view/screens/common/button.dart';
 import 'package:subfave/view/screens/common/email_form.dart';

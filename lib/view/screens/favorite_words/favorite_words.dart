@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:subfave/models/word.dart';
-import 'package:subfave/view/providers/favorite_words.dart';
+import 'package:subfave/controllers/favorite_words.dart';
 import 'package:subfave/view/screens/common/appbar.dart';
 import 'package:subfave/view/screens/common/drawer.dart';
 import 'package:subfave/view/screens/common/words_page.dart';

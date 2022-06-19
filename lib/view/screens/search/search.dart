@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:subfave/models/movie.dart';
-import 'package:subfave/view/providers/search_movie.dart';
+import 'package:subfave/controllers/search_movie.dart';
 import 'package:subfave/view/screens/common/appbar.dart';
 import 'package:subfave/view/screens/common/drawer.dart';
 import 'package:subfave/view/screens/common/left_side_menu.dart';
