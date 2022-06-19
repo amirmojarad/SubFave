@@ -50,8 +50,6 @@ class HomePage extends StatelessWidget {
                                 .take(10)
                                 .toList();
                                 var collections = context.watch<HomeProvider>().collections.take(10).toList();
-                            print("ASDASD " + faveWords.toString());
-                            print("ASDASD " + collections.toString());
                             if (snapshot.hasData) {
                               return Column(
                                 children: [

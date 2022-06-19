@@ -29,7 +29,7 @@ class CollectionScreen extends StatelessWidget {
                     const Spacer(),
                     SizedBox(
                       width: width - 300,
-                      height: height - 300,
+                      height: height,
                       child: FutureBuilder(
                         future:
                             context.read<CollectionProvider>().getCollections(),
